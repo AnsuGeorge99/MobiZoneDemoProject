@@ -1,0 +1,40 @@
+﻿@model DomainLayer.Registration
+
+@{
+    ViewData["Title"] = "My Profile";
+    var data = ViewData["MyProfile"] as DomainLayer.Registration;
+    var address = ViewData["UserAddress"] as IEnumerable<DomainLayer.Address>;
+    var returnUrl = ViewBag.ProfileUrl as string;
+    @*var ReturnUrl = ViewBag.AddressUrl as string;*@
+}
+
+
+<div class="card" style="padding: 15px; margin-bottom: 25px;">
+    <p class="text" style="font-size: 35px; width: 220%;"> @data.firstName @data.lastName</p>
+    <p class="text" style="font-size: 25px; width: 220%;">@data.email</p>
+    <div class="address"><p class="card-title" style="text-align: center; font-size: large;">My Addresses</p></div>
+    @if (address == null || address.Count() == 0)
+    {
+        <div class="row" style="padding: 2px; margin-left: -37px;">
+            <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+        </div>
+    }
+    else
+    {
+        @foreach (var userAddress in address)
+        {
+            <div id="address">
+                <div class="address">
+                    <label class="form-check-label" style="margin-left: 30px;">@userAddress.name <br />@userAddress.address<br />@userAddress.district<br />@userAddress.state<br />@userAddress.country<br />@userAddress.pincode<br />@userAddress.phoneNumber</label>
+                    <i class="bi bi-pencil-fill"></i>
+                    <a class="btn btn-primary"  asp-controller="CheckOut" asp-action="UpdateAddress" asp-route-id="@userAddress.id">Edit</a>
+                    <a class="btn btn-primary" asp-controller="CheckOut" asp-action="DeleteAddress" asp-route-id="@userAddress.id">Delete</a>
+                </div>
+            </div>
+            <br />
+        }
+        <div class="row" style="padding: 2px; margin-left: -37px;">
+            <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+        </div>
+    }
+</div>

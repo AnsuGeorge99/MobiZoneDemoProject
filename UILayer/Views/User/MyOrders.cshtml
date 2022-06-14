@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DomainLayer.UserCheckOut>
+
+@{
+    ViewData["Title"] = "MyOrders";
+}
+
+<div style="margin: 10px; font-weight: bold;"> My Orders </div>
+@*@foreach (var data in Model)
+{
+    <div class="row" style="padding: 14px; border: solid 1px #d7d1d1; margin: 4px;">
+        <div class="col-2">
+            @if (data.product.images != null && data.product.images.Count != 0)
+            {
+                <a asp-action="OrderDetails" asp-route-id="@data.id"><img src="~/Product/Images/@data.product.images.FirstOrDefault().imagePath" style="width: 54px;" /></a>
+            }
+            else
+            {
+                <a asp-action="OrderDetails" asp-route-id="@data.id"><img src="/images/ProductImages/" style="width: 100px;" /></a>
+            }
+
+        </div>
+        <div class="col-3">
+            <div class="col-12" style="font-weight: bold;">@data.product.name</div>
+            <div class="col-12">@data.product.model</div>
+        </div>
+        <div class="col-3">
+            <div class="col-12" style="font-weight: bold;color: green;"> &#8377 @data.product.price</div>
+        </div>
+        <div class="col-4">
+            <div class="col-12" style="font-weight: bold;">@data.status</div>
+        </div>
+    </div>
+}*@
+
+<p>
+    hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+</p>
+<a type="button" class="btn  btn-orange" style="background-color: #078ceb; padding-left: 1%; padding-right: 1%; color: white; margin-left: 81%; margin-top: 13%; " asp-action="index">Back</a>&nbsp;
+
+
+<style>
+    .product {
+        margin-left: 8%;
+        font-size: 150%;
+    }
+
+    .price {
+        margin-top: -34px;
+        margin-left: 48%;
+        font-size: 150%;
+    }
+
+    .status {
+        margin-left: 85%;
+        margin-top: -35px;
+        font-size: 150%;
+    }
+</style>

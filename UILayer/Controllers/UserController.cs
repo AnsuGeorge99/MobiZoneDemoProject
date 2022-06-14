@@ -1,0 +1,238 @@
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using UILayer.Datas.Apiservices;
+using Microsoft.AspNetCore.Authorization;
+using DomainLayer;
+using UILayer.ApiServices;
+using Microsoft.AspNetCore.Http;
+using DomainLayer.EmailService;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.Win32;
+
+namespace UILayer.Controllers
+{
+    public class UserController : Controller
+    {
+        private UserApi _userApi;
+        private readonly ProductApi _productApi;
+        private readonly AddressApi _addressApi;
+        private readonly OrdersApi _ordersApi;
+        private IConfiguration _configuration;
+        private Registration _registration;
+        private readonly INotyfService _notyf;
+        public UserController(IConfiguration configuration, INotyfService notyf)
+        {
+            _configuration = configuration;
+            _userApi = new UserApi(_configuration);
+            _productApi = new ProductApi(_configuration);
+            _addressApi = new AddressApi(_configuration);
+            _ordersApi = new OrdersApi(_configuration);
+            _notyf = notyf;
+        }
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Index()
+        {
+            return View(_productApi.GetProduct());
+        }
+
+        [HttpGet]
+        public IActionResult UserRegister()
+
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UserRegister(Registration registrationView)
+        {
+            var check = _userApi.UserRegister(registrationView);
+            if (check)
+            {
+                _notyf.Success("Registration Successfully Completed");
+            }
+            else
+            {
+                _notyf.Error("Registration Failed, You are already Registered");
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Login(string ReturnUrl)
+        {
+            ViewData["LoginUrl"] = ReturnUrl;
+            return View();
+        }
+
+        [HttpPost("/user/login")]
+        public async Task<IActionResult> Login(Login loginView, string ReturnUrl)
+        {
+            AdminApi admin = new AdminApi();
+            if (ReturnUrl == "/admin")
+            {
+                if (admin.AdminLogin(loginView))
+                {
+                    var claims = new List<Claim>();
+
+                    claims.Add(new Claim("password", loginView.password));
+                    claims.Add(new Claim("email", loginView.username));
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
+                    claims.Add(new Claim(ClaimTypes.Name, loginView.username));
+                    claims.Add(new Claim("role", "Admin"));
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrincipal);
+                    return Redirect(ReturnUrl);
+                }
+            }
+            Login userLogin = new Login();
+            bool check = _userApi.UserLogin(loginView);
+            if (check)
+            {
+                _registration = _userApi.GetUserInfo().Where(register => register.email == loginView.username && loginView.password.Equals(loginView.password)).FirstOrDefault();
+                var claims = new List<Claim>();
+                claims.Add(new Claim("password", loginView.password));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
+                claims.Add(new Claim(ClaimTypes.Role, "User"));
+                claims.Add(new Claim("email", loginView.username));
+                claims.Add(new Claim(ClaimTypes.Name, _registration.firstName + " " + _registration.lastName));
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(claimsPrincipal);
+                if(ReturnUrl== null)
+                {
+                    return Redirect("/");
+                }
+                else
+                {
+                    return Redirect(ReturnUrl);
+                }
+            }
+            TempData["Error"] = "*Invalid Email or Password";
+            return View("Login");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("Login");
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPassword forgotPassword)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    HttpContext.Session.SetString("key", "value");
+                    var data = HttpContext.Session.Id;
+
+                    ModelState.Clear();
+                    var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(forgotPassword.email)).FirstOrDefault();
+                    if (userDetails != null)
+                    {
+                        forgotPassword.emailSent = true;
+                        Email email = new Email();
+                        email.body = "<a href='https://localhost:44328/user/ResetPassword/" + forgotPassword.email + "/" + data + "'>Click here to reset your password</a>";
+                        email.toEmail = forgotPassword.email;
+                        email.subject = "reset password";
+                        _userApi.Email(email);
+                        return View("ForgotPassword", forgotPassword);
+                    }
+                }
+                return View(forgotPassword);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("/user/ResetPassword/{email}/{sessionId}")]
+        public ActionResult ResetPassword(string email, string sessionId)
+        {
+            if (sessionId == HttpContext.Session.Id)
+            {
+                var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(email)).FirstOrDefault();
+                ResetPassword reset = new ResetPassword();
+                reset.user = userDetails;
+                return View(reset);
+            }
+            return RedirectToAction("ForgotPassword");
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPassword resetPassword)
+        {
+            try
+            {
+                Registration register = new Registration();
+                register = _userApi.GetUserInfo().Where(c => c.email.Equals(resetPassword.user.email)).FirstOrDefault();
+                register.password = resetPassword.newPassword;
+                var result = _userApi.ForgotPassword(register);
+                return Redirect("/");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpPost("filter")]
+        public IActionResult filter(string brandName)
+        {
+            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
+            return View("Index",data);
+        }
+
+        public IActionResult SearchProduct(string name)
+        {
+            var data = _productApi.ProductSearch(name);
+            return View("Index", data);
+
+        }
+
+        public IActionResult SortByAsc(string price)
+        {
+            var data = _productApi.SortByAscending(price);
+            return View("Index", data.Result);
+        }
+
+        public IActionResult SortByDescending(string price)
+        {
+            var data = _productApi.SortbyDescending(price);
+            return View("Index", data.Result);
+        }
+
+        public IActionResult MyProfile()
+        {
+            var addresses = _addressApi.GetAddress();
+            string email = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
+            var user = _userApi.GetUserInfo().Where(x => x.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+            ViewData["UserAddress"] = user.address;
+            ViewData["MyProfile"] = user;
+            ViewBag.ProfileUrl = "/User/MyProfile/";
+            return View();
+        }
+
+        public IActionResult MyOrders(int id)
+        {
+            var orders = _ordersApi.GetCheckOutList().Where(x => x.orderId.Equals(id)).FirstOrDefault();
+            return View();
+        }
+    }
+}
