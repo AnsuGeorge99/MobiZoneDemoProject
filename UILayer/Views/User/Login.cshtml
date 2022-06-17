@@ -45,7 +45,7 @@
             border-radius: 10px;
             padding: 2rem;
             width: 353px;
-            height: 340px;
+            height: 325px;
             font-family: 'Poppins', sans-serif;
         }
 
@@ -127,7 +127,7 @@
             position: absolute;
             z-index: -1;
             width: calc(100% + 6px);
-            height: calc(100% + -41px);
+            height: calc(100% + 2px);
             border-radius: 10px;
             overflow: hidden;
             top: -3px;
@@ -178,7 +178,7 @@
         }
     </script>
 </head>
-<section class="simple-form " style=" height: 40%; margin-top: -100px; margin-left: -20px; width: fit-content;">
+<section class="simple-form " style=" height: 42%; margin-top: -100px; margin-left: -20px; width: fit-content;">
     <div class="animate-border"></div>
     <div class="simple-form-content">
         @if (Context.Request.Query.TryGetValue("ReturnUrl", out queryVal) && queryVal.FirstOrDefault() == "/admin")

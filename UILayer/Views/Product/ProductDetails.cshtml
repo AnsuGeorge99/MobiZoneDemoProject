@@ -22,14 +22,15 @@
         .container button:hover {
             opacity: 0.7;
         }
+        
 </style>
 
 <div class="container">
     <div class="row">
-        <div class="col-4">
+        <div class="col-4"style=" margin-top: 20px;">
             <div class="row">
                 <div class="col-12">
-                    <img src="~/images/ProductImages/@products.image" />
+                    <img src="~/images/ProductImages/@products.image" style="margin-left: -16px;"/>
                 </div>
                 <div style=" margin-top: 10px;">
 
@@ -42,24 +43,24 @@
         <div class="col-4">
             <div class="products">
                 <p class="text" style="font-size: 45px; width: 220%;"> @products.productName</p>
-
+                <br />
                 <div class="row">
                     <div class="col-6">
-                        <p class="text">Price</p>
-                        <p class="text">Ram</p>
-                        <p class="text">Storage</p>
-                        <p class="text">Sim Type</p>
-                        <p class="text">Color</p>
-                        <p class="text">Processor</p>
-                        <p class="text">Description</p>
+                        <p class="text"><b>Price</b></p>
+                        <p class="text"><b>Ram</b></p>
+                        <p class="text"><b>Storage</b></p>
+                        <p class="text"><b>Sim Type</b></p>
+                        <p class="text"><b>Color</b></p>
+                        <p class="text"><b>Processor</b></p>
+                        <p class="text"><b>Description</b></p>
                     </div>
                     <div class="col-6">
-                        <p class="text">&#8377 @products.productPrice</p>
+                        <p class="text" style="color: red;"><b>&#8377 @products.productPrice</b></p>
                         <p class="text">@products.specification.productRam</p>
                         <p class="text">@products.specification.productStorage</p>
                         <p class="text">@products.specification.productSim</p>
                         <p class="text">@products.specification.productColor</p>
-                        <p class="text">@products.specification.productProcessor</p>
+                        <p class="text" style=" width: 400px;">@products.specification.productProcessor</p>
                         <p class="text" style=" width: 400px;">@products.description</p>
                     </div>
                 </div>
