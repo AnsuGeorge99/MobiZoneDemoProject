@@ -4,42 +4,45 @@
     <div class="btns">
         <span class="fas fa-bars"></span>
     </div>
-    <nav class="sidebar">
-        <div class="text">
-            Products
-        </div>
-        <ul class="unorder">
-            <li class="list">
-                <a href="#" class="feat-btns">
-                    Filter By Brand
-                    <span class="fas fa-caret-down first"></span>
-                </a>
-                <ul class="feat-show">
-                    <li class="list">
-                        <form action="filter" method="post">
-                            <select name="brandName" id="cars" style="width: 150px">
+ 
+        <nav class="sidebar">
+            <div class="text">
+                Products
+            </div>
+            <ul class="unorder">
+                <li class="list">
+                    <a href="#" class="feat-btns">
+                        Filter By Brand
+                        <span class="fas fa-caret-down first"></span>
+                    </a>
+                    <ul class="feat-show">
+                        <li class="list">
+                            <form action="filter" method="post">
+                                <select name="brandName" id="cars" style="width: 150px">
 
-                                <option value="Oppo">Oppo</option>
-                                <option value=""></option>
+                                    <option value="Oppo">Oppo</option>
+                                    <option value=""></option>
 
-                            </select>
-                            <input type="submit" value="filter">
-                        </form>
-                    </li>
-                </ul>
-            </li>
-            <li class="list">
-                <a href="#" class="serv-btns">
-                    Sort By Price
-                    <span class="fas fa-caret-down second"></span>
-                </a>
-                <ul class="serv-show">
-                    <li class="list"><a asp-action="SortByDescending">High to Low</a></li>
-                    <li class="list"><a asp-action="SortByAsc">Low to High</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+                                </select>
+                                <input type="submit" value="filter">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list">
+                    <a href="#" class="serv-btns">
+                        Sort By Price
+                        <span class="fas fa-caret-down second"></span>
+                    </a>
+                    <ul class="serv-show">
+                        <li class="list"><a asp-action="SortByDescending">High to Low</a></li>
+                        <li class="list"><a asp-action="SortByAsc">Low to High</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+   
     
     <script>
         $('.btns').click(function () {
