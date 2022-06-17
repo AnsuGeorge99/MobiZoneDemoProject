@@ -15,6 +15,7 @@ using UILayer.Controllers;
 using DomainLayer.Product;
 using Microsoft.Extensions.Configuration;
 using UILayer.ApiServices;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace UILayer.Controllers
 {
@@ -24,13 +25,15 @@ namespace UILayer.Controllers
         ProductView Storage = null;
         private readonly ProductApi _productApi;
         private IWebHostEnvironment _webHostEnvironment;
+        private readonly INotyfService _notyf;
         Masterdataapi _masterdataapi;
 
-        public ProductController(IConfiguration configuration, IWebHostEnvironment hostEnvironment)
+        public ProductController(IConfiguration configuration, IWebHostEnvironment hostEnvironment, INotyfService notyf)
         {
             _configuration = configuration;
             _productApi = new ProductApi(_configuration);
             _webHostEnvironment = hostEnvironment;
+            _notyf = notyf;
         }
 
         [HttpGet]
@@ -83,7 +86,12 @@ namespace UILayer.Controllers
             bool result = _productApi.Delete(id);
             if (result)
             {
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                _notyf.Success("Deleted Successfully");
+            }
+            else
+            {
+                _notyf.Error("Failed to Delete");
             }
             return RedirectToAction("Index");
 

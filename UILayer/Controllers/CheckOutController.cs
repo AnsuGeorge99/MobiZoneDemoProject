@@ -199,7 +199,7 @@ namespace UILayer.Controllers
             }
             else
             {
-                var data = _productApi.GetById(checkOut.productId);
+                var data = _productApi.GetProduct().Where(c => c.id.Equals(checkOut.productId)).FirstOrDefault();
                 data.quantity = data.quantity - checkOut.quantity;
                 if (data.quantity == 0)
                 {
