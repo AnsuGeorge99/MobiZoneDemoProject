@@ -229,10 +229,10 @@ namespace UILayer.Controllers
             return View();
         }
 
-        public IActionResult MyOrders(int id)
+       /* public IActionResult MyOrders()
         {
-            var orders = _ordersApi.GetCheckOutList().Where(x => x.orderId.Equals(id));
             var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+            var orders = _ordersApi.GetCheckOutList().Where(x => x.orderId.Equals(user.id));
             foreach (var checkOutData in orders)
             {
                 var product = _productApi.GetProduct().Where(c => c.id.Equals(checkOutData.productId)).FirstOrDefault();
@@ -240,6 +240,6 @@ namespace UILayer.Controllers
 
             }
             return View(orders);
-        }
+        }*/
     }
 }
