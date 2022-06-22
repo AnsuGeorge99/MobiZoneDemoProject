@@ -9,6 +9,12 @@
     var returnUrl = ViewBag.BuyNowUrl as string;
 
 }
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -36,7 +42,7 @@
                         <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
                     </div>
                     <div class="row" style="padding: 2px; margin-left: -37px;">
-                        <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+                        <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;"><span class="glyphicon glyphicon-plus"></span>Add New Address</a></div>
                     </div>
                 </div>
             }
@@ -71,7 +77,7 @@
         {
 
         <div class="form-check">
-            <input class="form-check-input" onchange="paymentMode()" name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)'>
+            <input class="form-check-input" onchange="paymentMode()" name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)' style="margin-left: -18px; ">
             <label class="form-check-label" for="flexCheckDefault" style=" margin-left: 10px;">
                 @items
             </label>
@@ -91,19 +97,19 @@
             <h5 class="card-title" style="text-align: center; font-size: large; margin-top: 25px; margin-right: 20px; "><b>Price Details</b></h5>
         </div>
         <div>
-            <p class="card-text" id="priceField" style="margin-left: 55px;">Price for each product : Rs. @products.productPrice</p>
-            <div class="card-text" style="margin-left: 55px;"> <div class="row"><p class="col-6">Shipping Charge : <p class="col-6" style="color: green; color: green; position: relative; right: 530px">Free</p>  </div></div>
+            <p class="card-text" id="priceField" style="margin-left: 55px;"><b>Price for each product : Rs. @products.productPrice</b></p>
+            <div class="card-text" style="margin-left: 53px; "> <div class="row"><p class="col-6"><b>Shipping Charge : </b><p class="col-6" style="color: green; color: green; position: relative; right: 530px;"><b>Free</b></p>  </div></div>
             <div id="price"></div>
         </div>
 
         <div class="">
-            <p class="card-text" id="totalPrice" style="margin-left: 55px;">Total Payable : Rs. @products.productPrice</p>
+            <p class="card-text" id="totalPrice" style="margin-left: 53px;"><b>Total Payable : Rs. @products.productPrice</b></p>
             <div id="price"></div>
         </div>
         <div class="row" style="margin-bottom: 25px;">
             <div class="col"><a asp-controller="user" asp-action="Index" class="btn btn-primary" style="position: relative; left: 200px;">Cancel</a></div>
             <div class="col"></div>
-            <div class="col col d-flex justify-content-end "><input type="submit" value="Place Order" class="btn btn-primary" style=" position: relative; right: 1175px;" /></div>
+            <div class="col col d-flex justify-content-end "><input type="submit" value="Place Order" class="btn btn-primary" style=" position: relative; right: 1185px;" /></div>
         </div>
     </div>
 </form>
