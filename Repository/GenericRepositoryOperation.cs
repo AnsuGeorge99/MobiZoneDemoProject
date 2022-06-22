@@ -84,9 +84,6 @@ namespace RepositoryLayer
             }
             
         }
-
-       
-
         public async Task<T> GetById(int id, params Expression<Func<T, object>>[] includes)
         {
             try

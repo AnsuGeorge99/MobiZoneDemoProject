@@ -1,4 +1,5 @@
 ﻿using DomainLayer;
+using DomainLayer.AddToCart;
 using DomainLayer.AdminSettings;
 using DomainLayer.Product;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -26,5 +27,6 @@ namespace Repository
         public DbSet<ProductsModel> ProductsModel { get; set; }
         public DbSet<UserCheckOut> UserCheckOut { get; set; }
         public DbSet<AdminContact> contact { get; set; }
+        public DbSet<Cart> cart { get; set; }
     }
 }
