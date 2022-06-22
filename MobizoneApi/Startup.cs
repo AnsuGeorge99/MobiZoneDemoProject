@@ -69,6 +69,8 @@ namespace MobizoneApi
             services.AddScoped(typeof(IAboutOperations), typeof(AboutOperations));
             services.AddScoped(typeof(IContactOperations), typeof(ContactOperations));
             services.AddScoped(typeof(IPrivacyAndPolicyOperations), typeof(PrivacyAndPolicyOperations));
+            services.AddScoped(typeof(ICartOperations), typeof(CartOperations));
+            services.AddScoped(typeof(ICartDetailsOperations), typeof(CartDetailsOperations));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
             
