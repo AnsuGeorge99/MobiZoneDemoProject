@@ -8,34 +8,42 @@
     @*var ReturnUrl = ViewBag.AddressUrl as string;*@
 }
 
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-<div class="card" style="padding: 15px; margin-bottom: 25px;">
-    <p style=" text-align: center; font-size: 20px;">My Account</p>
-    <p class="text" style="font-size: 35px; width: 220%;"> @data.firstName @data.lastName</p>
-    <p class="text" style="font-size: 25px; width: 220%;">@data.email</p>
-    <div class="address"><p class="card-title" style="text-align: center; font-size: large;">My Addresses</p></div>
-    @if (address == null || address.Count() == 0)
-    {
-        <div class="row" style="padding: 2px; margin-left: -37px;">
-            <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
-        </div>
-    }
-    else
-    {
-        @foreach (var userAddress in address)
+<div>
+    <div class="card" style="padding: 15px; margin-bottom: 25px;">
+        <p style=" font-size: 20px; margin-left: 35px;">My Account</p>
+        <p class="text" style="font-size: 30px; width: 220%; margin-left: 650px; "> @data.firstName @data.lastName</p>
+        <p class="text" style="font-size: 20px; width: 220%; margin-left: 603px;">@data.email</p>
+        <div class="address"><p class="card-title" style="font-size: large; margin-left: 200px; ">My Addresses</p></div>
+        @if (address == null || address.Count() == 0)
         {
-            <div id="address">
-                <div class="address">
-                    <label class="form-check-label" style="margin-left: 30px;">@userAddress.name <br />@userAddress.address<br />@userAddress.district<br />@userAddress.state<br />@userAddress.country<br />@userAddress.pincode<br />@userAddress.phoneNumber</label>
-                    <i class="bi bi-pencil-fill"></i>
-                    <a class="btn btn-primary"  asp-controller="CheckOut" asp-action="UpdateAddress" asp-route-id="@userAddress.id">Edit</a>
-                    <a class="btn btn-primary" asp-controller="CheckOut" asp-action="DeleteAddress" asp-route-id="@userAddress.id">Delete</a>
+            <div class="row" style="padding: 2px; margin-left: -37px;">
+                <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
+            </div>
+        }
+        else
+        {
+            @foreach (var userAddress in address)
+            {
+                <div id="address">
+                    <div class="address">
+                        <label class="form-check-label" style="margin-left: 270px;">@userAddress.name <br />@userAddress.address<br />@userAddress.district<br />@userAddress.state<br />@userAddress.country<br />@userAddress.pincode<br />@userAddress.phoneNumber</label>
+                        <i class="bi bi-pencil-fill"></i>
+                        <a class="btn btn-primary" asp-controller="CheckOut" asp-action="UpdateAddress" asp-route-id="@userAddress.id">Edit</a>
+                        <a class="btn btn-primary" asp-controller="CheckOut" asp-action="DeleteAddress" asp-route-id="@userAddress.id">Delete</a>
+                    </div>
+                </div>
+                <br />
+            }
+            <div class="row" style="padding: 2px; margin-left: -37px;">
+                <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style=" margin-left: 285px;"><span class="glyphicon glyphicon-plus"></span>Add New Address</a>
                 </div>
             </div>
-            <br />
         }
-        <div class="row" style="padding: 2px; margin-left: -37px;">
-            <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;">Add New Address</a></div>
-        </div>
-    }
+    </div>
 </div>
