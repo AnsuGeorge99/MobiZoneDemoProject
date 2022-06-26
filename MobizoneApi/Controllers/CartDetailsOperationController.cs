@@ -73,7 +73,10 @@ namespace MobizoneApi.Controllers
         {
             try
             {
-                _CartDetails.CartDetailsGetById(Id);
+                var data = _CartDetails.CartDetailsData();
+                _CartDetails.Delete(data.Where(c => c.id.Equals(Id)).FirstOrDefault());
+                
+
                 return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
             }
             catch (Exception ex)
