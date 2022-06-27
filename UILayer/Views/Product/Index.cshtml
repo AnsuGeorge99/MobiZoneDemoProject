@@ -24,6 +24,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" defer></script>
 
+@*@if (.image == null || data.product.image.Count() == 0)
+{
+    <p>no image</p>
+}
+else
+{*@
+
 <table id="myTable" class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -36,6 +43,7 @@
     </thead>
 
 </table>
+}
 <script>
     $(document).ready(function () {
         $.ajax({
