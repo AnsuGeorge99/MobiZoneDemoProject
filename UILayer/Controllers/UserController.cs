@@ -241,18 +241,18 @@ namespace UILayer.Controllers
             return View();
         }
 
-        /* public IActionResult MyOrders()
-         {
-             var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-             var orders = _ordersApi.GetCheckOutList().Where(x => x.orderId.Equals(user.id));
-             foreach (var checkOutData in orders)
-             {
-                 var product = _productApi.GetProduct().Where(c => c.id.Equals(checkOutData.productId)).FirstOrDefault();
-                 checkOutData.product = product;
+        public IActionResult MyOrders()
+        {
+            var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+            var orders = _ordersApi.GetCheckOutList().Where(x => x.orderId.Equals(user.registrationId));
+            foreach (var checkOutData in orders)
+            {
+                var product = _productApi.GetProduct().Where(c => c.id.Equals(checkOutData.productId)).FirstOrDefault();
+                checkOutData.product = product;
 
-             }
-             return View(orders);
-         }*/
+            }
+            return View(orders);
+        }
 
         [HttpGet]
         public IActionResult AddtoCart()
@@ -477,7 +477,7 @@ try
                 {
                 }
                 if (_carts.ToList().Where(c => c.usersId.Equals(user.registrationId)) != null)
-                {
+                 {
                     var data = _carts.ToList().Where(c => c.usersId.Equals(user.registrationId)).FirstOrDefault();
 
                     var count = 0;
@@ -525,7 +525,40 @@ try
             ViewData["cart"] = vartData;
             ViewData["userData"] = user;
             return View();
+
         }
+        public IActionResult BuyCart(UserCheckOut checkout)
+        {
+            Registration user;
+            user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+            Cart myCart = new Cart();
+            myCart = _cartOperationApi.CartDatas().Where(c => c.usersId.Equals(user.registrationId)).FirstOrDefault();
+            foreach (var caratDetailsData in myCart.cartDetails)
+            {
+                var product = _productApi.GetProduct().Where(c => c.id.Equals(caratDetailsData.productId)).FirstOrDefault();
+                caratDetailsData.product = product;
+            }
+            foreach (var data in myCart.cartDetails)
+            {
+                UserCheckOut checkout1 = new UserCheckOut();
+                checkout1.addressId = checkout.addressId;
+                Random rnd = new Random();
+                checkout1.orderId = rnd.Next();
+                checkout1.paymentModeId = checkout.paymentModeId;
+                checkout1.userId = checkout.userId;
+                checkout.status = DomainLayer.Orders.OrderStatus.orderPlaced;
+                checkout.price = (int)data.price;
+                bool result = _ordersApi.AddCheckOutList(checkout);
+            }
+            _cartOperationApi.DeleteCartData(myCart.id);
+            return View("OrderPlaced");
+        }
+
+
     }
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f9aaabf69e5185bd186b2f135d00a3c2f39f1cca

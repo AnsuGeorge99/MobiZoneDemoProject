@@ -15,7 +15,7 @@
     <header style="background-color:cadetblue;">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="user" asp-action="Index">Mobizone</a>
+                <a class="navbar-brand" asp-area="" asp-controller="User" asp-action="Index">Mobizone</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
                             </li>
 
                             <li>
-                                <a href="#"style="background-color: white; color: black; position:relative; top:1px; left: 130px; ">
+                                <a asp-controller="user" asp-action="addtocart" style="background-color: white; color: black; position:relative; top:1px; left: 130px; ">
                                     <span class="glyphicon glyphicon-shopping-cart" ></span>
                                 </a>
                             </li>
