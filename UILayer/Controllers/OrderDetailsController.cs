@@ -25,6 +25,7 @@ namespace UILayer.Controllers
             _orderDetailsApi.OrderDetailsEdit(orderupdate);
             return RedirectToAction("OrderList");
         }
+
         [HttpGet]
         public IActionResult OrderStatus()
         {
@@ -37,11 +38,13 @@ namespace UILayer.Controllers
                 return View("Index");
             }
             var orderDetailsList = _orderDetailsApi.OrderDetailsGetById(id);
-
-
             return View(orderDetailsList);
+        }
 
-
+        [HttpGet]
+        public IActionResult checkout(int orderId, string status)
+        {
+            return View("Orderplaced");
         }
     }
 }
