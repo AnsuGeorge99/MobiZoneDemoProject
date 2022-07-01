@@ -25,7 +25,7 @@
     <thead>
         <tr>
             <th>SL</th>
-            <th>OrderId</th>
+            <th>Order Id</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -68,7 +68,7 @@
                 success: function (data) {
                     var c = 0;
                     console.log(data.data[0]);
-                    var tableData = data.data[0];
+                    var tableData = data.data;
                     $('#datatable').dataTable({
                         data: tableData,
                         columns: [
@@ -80,7 +80,7 @@
                                     dataStatus = full.status;
                                     var sliceData = dataList.slice(dataStatus)
                                     var sliceStatus = statusList.slice(dataStatus)
-                                    var formData = '<form id="orderStatus" action="orderdetails/checkout" method="post"><input name="orderId" type="hidden" value="' + full.orderId + '"/><select id="enumDropdown" name="status" style="width: 39%;"><option value="' + dataList[full.status - 1] + '">' + dataList[full.status - 1] + '</option>';
+                                    var formData = '<form id="orderStatus" action="/orderdetails/OrderUpdate" method="post"><input name="orderId" type="hidden" value="' + full.orderId + '"/><select id="enumDropdown" name="status" style="width: 39%;"><option value="' + dataList[full.status - 1] + '">' + dataList[full.status - 1] + '</option>';
                                     var endData = '</select><input style="padding: 6px;margin-left: 23px;font-variant: all-small-caps;" type="submit" value="update" class="btn btn-orange"/></form>'
                                     sliceData.forEach(function (element) {
                                         var option = '<option value="' + element + '">' + element + '</option>';
@@ -89,14 +89,15 @@
                                     formData = formData + endData;
                                     return formData;
                                 }
-                            }]
+                            }
+                        ]
                     })
                     var $select = $('#enumDropdown');
                 }
             })
         }
        @* $.ajax({
-            url: 'RoleTYpe',
+            url: 'RoleType',
             type: 'get',
             datatype: 'json',
             success: function (data) {
@@ -119,7 +120,7 @@
         $("#orderStatus").submit(function (e) {
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
-            var actionUrl = form.attr('orderdetails/checkout');
+            var actionUrl = form.attr('/orderdetails/OrderUpdate');
             $.ajax({
                 type: "POST",
                 url: actionUrl,
