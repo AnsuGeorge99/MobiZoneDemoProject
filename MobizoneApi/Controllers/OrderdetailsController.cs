@@ -63,7 +63,7 @@ namespace MobizoneApi.Controllers
 
         }
         [HttpGet("Orderdetails")]
-        public Response<IEnumerable<UserCheckOut>> Orderdetails(int id)
+        public Response<IEnumerable<UserCheckOut>> Orderdetails()
         {
             Response<IEnumerable<UserCheckOut>> _response = new Response<IEnumerable<UserCheckOut>>();
             try
@@ -94,8 +94,8 @@ namespace MobizoneApi.Controllers
 
 
         }
-        [HttpPut("OrderPut")]
-        public IActionResult OrderPut([FromBody] UserCheckOut orderPut)
+        [HttpPost]
+        public IActionResult Post(UserCheckOut orderPut)
         {
             Response<string> _response = new Response<string>();
             try

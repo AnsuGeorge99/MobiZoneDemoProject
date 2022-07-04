@@ -167,8 +167,15 @@ namespace MobizoneApi.Controllers
         {
             try
             {
-                    _checkOutOperations.UpdateCheckOut(userCheckOut);
+                userCheckOut.address = _addressOperations.GetAddressById(userCheckOut.addressId).Result;
+                userCheckOut.product = _productCatagory.GetProducts().Result.Where(x => x.id.Equals(userCheckOut.productId)).FirstOrDefault();
+                userCheckOut.user = _userOperations.GetUser().Result.Where(val => val.registrationId.Equals(userCheckOut.userId)).FirstOrDefault();
+                var data =  _checkOutOperations.UpdateCheckOut(userCheckOut);
+                if (data != null)
+                {
                     return StatusCode(StatusCodes.Status200OK);
+                }
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
             catch (Exception ex)
             {
