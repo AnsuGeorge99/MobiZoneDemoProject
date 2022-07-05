@@ -72,12 +72,13 @@ namespace UILayer.Controllers
         public IActionResult Edit(int id)
         {
             Storage = new ProductView();
-            ProductsModel product = _productApi.GetById(id);
+            ProductsModel product = _productApi.GetProduct().Where(x => x.id.Equals(id)).FirstOrDefault();
             Storage.productName = product.productName;
             Storage.productPrice = product.productPrice;
             Storage.productModel = product.productModel;
             Storage.quantity = product.quantity;
             Storage.description = product.description;
+            Storage.specification = product.specification;
             return View("Create", Storage);
         }
 

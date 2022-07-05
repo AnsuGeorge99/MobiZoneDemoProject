@@ -26,6 +26,7 @@ namespace UILayer.Controllers
             _userApi = new UserApi(_configuration);
             _ordersApi = new OrdersApi(_configuration);
         }
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
             return View();
