@@ -5,7 +5,7 @@
     var returnUrl = ViewData["AddressUrl"] as string;
 }
 <div>
-    <h3 style="position: relative; right: -460px; margin-bottom: 30px; color: #157fdb;">Add New Address</h3>
+    <h3 style="position: relative; right: -600px; margin-bottom: 30px; color: #157fdb;">Add New Address</h3>
 </div>
 <div class="row align-item-center">
     <div class="col-md-8 mb-4">
@@ -24,7 +24,7 @@
                         <input asp-for="district" class="form-control" />
                         <span asp-validation-for="district" class="text-danger"></span>
                     </div>
-                    <div class="col"></div>
+                    @*<div class="col"></div>*@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
