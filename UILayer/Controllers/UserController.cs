@@ -247,11 +247,9 @@ namespace UILayer.Controllers
         public IActionResult MyOrders()
         {
             var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-<<<<<<< HEAD
+
             var orders = _ordersApi.GetCheckOutList().Where(x => x.userId.Equals(user.registrationId));
-=======
-            var orders = _ordersApi.GetCheckOutList().Where(x => x.userId.Equals(user.registrationId));          
->>>>>>> ef69d44e83dbd992490a4ee5ede3ab7482eb4a00
+
             foreach (var checkOutData in orders)
             {
                 var product = _productApi.GetProduct().Where(c => c.id.Equals(checkOutData.productId)).FirstOrDefault();
