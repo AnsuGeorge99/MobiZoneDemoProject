@@ -2,9 +2,95 @@
 @{
     ViewData["Title"] = "Index";
 }
+@*<link href="~/css/sliders/futurico-theme.css" />
+    <link href="~/css/sliders/nivo-slider.css" />*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-    .card{
+    img {
+        width: 100%;
+    }
+
+    .height {
+        height: 10px;
+    }
+
+    /* Image-container design */
+    .image-container {
+        max-width: 800px;
+        position: relative;
+        margin: auto;
+    }
+
+    .next {
+        right: 0;
+    }
+
+    /* Next and previous icon design */
+    .previous,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        padding: 10px;
+        margin-top: -25px;
+    }
+
+    /* caption decorate */
+    .captionText {
+        color: #000000;
+        font-size: 14px;
+        position: absolute;
+        padding: 12px 12px;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Slider image number */
+    .slideNumber {
+        background-color: #5574C5;
+        color: white;
+        border-radius: 25px;
+        right: 0;
+        opacity: .5;
+        margin: 5px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 24px;
+        position: absolute;
+    }
+
+    .fa {
+        font-size: 32px;
+    }
+
+        .fa:hover {
+            transform: rotate(360deg);
+            transition: 1s;
+            color: white;
+        }
+
+    .footerdot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.5s ease;
+    }
+
+        .active,
+        .footerdot:hover {
+            background-color: black;
+        }
+</style>*@
+<style>
+    .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         max-width: 300px;
         margin: auto;
@@ -32,60 +118,168 @@
         font-size: 18px;
     }
 
-    .card button:hover {
-        opacity: 0.7;
-    }
+        .card button:hover {
+            opacity: 0.7;
+        }
 
-/*    .addtocart {
-        margin-left:130px;
-        margin-top:-52px;
-    }
-    .buynow {
-        margin-left:1rem;
+    /*    .addtocart {
+            margin-left:130px;
+            margin-top:-52px;
+        }
+        .buynow {
+            margin-left:1rem;
 
-    }
-    .btn-primary{
-width:80px;
-    }*/
+        }
+        .btn-primary{
+    width:80px;
+        }*/
 </style>
 
-    <div class="container">
-        <div class="row">
-            @foreach (var items in Model)
-            {
-                <div class="col-md-4">
-                    <div class="card">
-                        @if (items.image != null)
-                        {
+@*<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+           <ol class="carousel-indicators">
+               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+           </ol>
+           <div class="carousel-inner" class="carousel-item-left">
+               <div class="carousel-item active">
+                   <img class="d-block w-100" src="/images/ProductImages/F13.jpeg" alt="First slide">
+               </div>
+               <div class="carousel-item">
+                   <img class="d-block w-100" src="/images/ProductImages/in 2b.jpeg" alt="Second slide">
+               </div>
+               <div class="carousel-item">
+                   <img class="d-block w-100" src="/images/ProductImages/M4 5G.jpeg" alt="Third slide">
+               </div>
+           </div>
+           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+           </a>
+           <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+           </a>
+    </div>*@
 
-                            <a asp-route-id="@items.id" asp-controller="Product" asp-action="ProductDetails"><img src="~/images/ProductImages/@items.image" alt="Mobile" style="width: 45%; height: 100%; position: relative; left: 0px;"></a>
-                        }
-                        else
-                        {
-                            <a asp-controller="Product" asp-action="ProductDetails"><img src="~/images/No Images found.jpg" alt="Mobile" style="width: 45%; height: 90%; position: relative; left: 0px;"></a>
-                        }
 
-                        <h1 style="font-size: 145%;">@items.productName</h1>
-                        <p class="price" style="color: black;">&#8377 @items.productPrice</p>
-
-                        <div class="buynow">
-                            <p><a asp-route-id="@items.id" asp-controller="checkout" asp-action="BuyNow"><button class="btn btn-primary" >Buy Now</button></a></p>
-                        </div>
-                        <div class="addtocart">
-                            <p><a asp-route-id="@items.id" asp-controller="User" asp-action="AddtoCart"><button class="btn btn-primary" >Add to Cart</button></a></p>
-
-                        </div>
-                        
-=
-                    </div>
-                </div>
-            }
-        </div>
+<!--<div class="image-container">
+    <div class="slide">
+        <div class="slideNumber">1</div>-->
+        @*<img src="https://www.geeksforgeeks.org/wp-content/uploads/html-768x256.png">*@
+    <!--<img src="~/images/dummyimg/orginal1.jpg" />
     </div>
+    <div class="slide">
+        <div class="slideNumber">2</div>-->
+        @*<img src="https://www.geeksforgeeks.org/wp-content/uploads/CSS-768x256.png">*@
+        <!--<img src="~/images/dummyimg/sale_mainpic_20081125004026mobileadda-banner.jpg" />
+    </div>
+    <div class="slide">
+        <div class="slideNumber">3</div>-->
+        @*<img src="https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner.png">*@
+        <!--<img src="~/images/dummyimg/Flipkart-Mobile-Bonanza-Sale-Feb-2020.jpg" />
+    </div>-->
+
+    <!-- Next and Previous icon to change images -->
+    <!--<a class="previous" onclick="moveSlides(-1)">
+        <i class="fa fa-chevron-circle-left"></i>
+    </a>
+    <a class="next" onclick="moveSlides(1)">
+        <i class="fa fa-chevron-circle-right"></i>
+    </a>
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="footerdot"
+          onclick="activeSlide(1)">
+    </span>
+    <span class="footerdot"
+          onclick="activeSlide(2)">
+    </span>
+    <span class="footerdot"
+          onclick="activeSlide(3)">
+    </span>
+</div>-->
 
 
 
 
+
+<div class="container">
+    <div class="row">
+        @foreach (var items in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    @if (items.image != null)
+                    {
+
+                        <a asp-route-id="@items.id" asp-controller="Product" asp-action="ProductDetails"><img src="~/images/ProductImages/@items.image" alt="Mobile" style="width: 45%; height: 100%; position: relative; left: 0px;"></a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Product" asp-action="ProductDetails"><img src="~/images/No Images found.jpg" alt="Mobile" style="width: 45%; height: 90%; position: relative; left: 0px;"></a>
+                    }
+
+                    <h1 style="font-size: 145%;">@items.productName</h1>
+                    <p class="price" style="color: black;">&#8377 @items.productPrice</p>
+
+                    <div class="buynow">
+                        <p><a asp-route-id="@items.id" asp-controller="checkout" asp-action="BuyNow"><button class="btn btn-primary">Buy Now</button></a></p>
+                    </div>
+                    <div class="addtocart">
+                        <p><a asp-route-id="@items.id" asp-controller="User" asp-action="AddtoCart"><button class="btn btn-primary">Add to Cart</button></a></p>
+
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@*<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    var slideIndex = 1;
+    displaySlide(slideIndex);
+
+    function moveSlides(n) {
+        displaySlide(slideIndex += n);
+    }
+
+    function activeSlide(n) {
+        displaySlide(slideIndex = n);
+    }
+
+    /* Main function */
+    function displaySlide(n) {
+        var i;
+        var totalslides =
+            document.getElementsByClassName("slide");
+
+        var totaldots =
+            document.getElementsByClassName("footerdot");
+
+        if (n > totalslides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = totalslides.length;
+        }
+        for (i = 0; i < totalslides.length; i++) {
+            totalslides[i].style.display = "none";
+        }
+        for (i = 0; i < totaldots.length; i++) {
+            totaldots[i].className =
+                totaldots[i].className.replace(" active", "");
+        }
+        totalslides[slideIndex - 1].style.display = "block";
+        totaldots[slideIndex - 1].className += " active";
+    }
+</script>*@
 
 
 
