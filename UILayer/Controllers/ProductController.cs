@@ -86,7 +86,6 @@ namespace UILayer.Controllers
             bool result = _productApi.Delete(id);
             if (result)
             {
-                //return RedirectToAction("Index");
                 _notyf.Success("Deleted Successfully");
             }
             else

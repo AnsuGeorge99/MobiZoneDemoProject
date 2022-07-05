@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "OrderList";
+    //columns.Add().Field(e => e.orderstatus).Template("#: displayEnum(data)#");
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -133,5 +134,12 @@
                 }
             });
         });
+    }
+</script>
+
+<script>
+    var collection = @Html.Raw(Json.Serialize(ViewData["enumList"]));
+    function displayEnum(dataItem) {
+        return collection[dataItem.OrderStatus];
     }
 </script>
