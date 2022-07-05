@@ -73,18 +73,19 @@
 
     <div class="card payment mt-3" id="paymentMode" style="margin-bottom: 26px; padding: 26px; display: none;">
         <h5 class="card-title address" style="text-align: center; font-size: large"><b>Payment Mode</b></h5>
+        <p style="color: red;">*Please select Payment Mode</p>
         @foreach (var items in paymentMode)
         {
 
-        <div class="form-check">
-            <input class="form-check-input" onchange="paymentMode()" name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)' style="margin-left: -18px; ">
-            <label class="form-check-label" for="flexCheckDefault" style=" margin-left: 10px;">
-                @items
-            </label>
-        </div><br />
-        <div class="row" style="padding: 2px; margin-left: -37px;">
-            <div class="col"><a class="btn btn-primary" id="paymentContinue" style="margin-left: 50px; color:white; display:none;">Continue</a></div>
-        </div>
+            <div class="form-check">
+                <input class="form-check-input" onchange="paymentMode()" name="paymentModeId" type="checkbox" value='@Convert.ToInt32(items)' style="margin-left: -18px; ">
+                <label class="form-check-label" for="flexCheckDefault" style=" margin-left: 10px;">
+                    @items
+                </label>
+            </div><br />
+            <div class="row" style="padding: 2px; margin-left: -37px;">
+                <div class="col"><a class="btn btn-primary" id="paymentContinue" style="margin-left: 50px; color:white; display:none;">Continue</a></div>
+            </div>
         }
         <p class="card-text"></p>
     </div>

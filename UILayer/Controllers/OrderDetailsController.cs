@@ -23,6 +23,7 @@ namespace UILayer.Controllers
         [HttpGet]
         public IActionResult OrderList()
         {
+            ViewData["enumList"] = Enum.GetNames(typeof(OrderStatus));
             return View();
         }
 

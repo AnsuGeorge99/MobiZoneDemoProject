@@ -11,14 +11,14 @@ namespace DomainLayer.Orders
 {
     public enum PaymentStatus : int
     {
-        [Display(Name = "Cash on delivery")]
+        [Display(Name = "Cash on Delivery")]
         CashOnDelivery = 1
     }
     public class PaymentStatuses
     {
         public int id { get; set; }
 
-        [Display(Name = "Cash on delivery")]
+        [Display(Name = "Cash on Delivery")]
         public PaymentStatus mode { get; set; }
         public bool isChecked { get; set; }
     }
