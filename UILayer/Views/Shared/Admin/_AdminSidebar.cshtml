@@ -9,10 +9,10 @@
          <div class="text">
             Admin
          </div>
-         <ul class="unorder">
-            <li class="actives" class="list"><a href="#">Dashboard</a></li>
+         <ul class="unorder" >
+            <li class="actives" class="list" ><a href="#">Dashboard</a></li>
             <li  class="list">
-               <a href="#" class="feat-btns">Product
+               <a href="#" class="feat-btns" style=" color: cyan; border-left-color: cyan;">Product
                <span class="fas fa-caret-down first"></span>
                </a>
                <ul class="feat-show">
@@ -21,18 +21,17 @@
                </ul>
             </li>
             <li  class="list">
-               <a href="#" class="serv-btns">Settings
+               <a href="#" class="serv-btns" style=" color: cyan; border-left-color: cyan;">Settings
                <span class="fas fa-caret-down second"></span>
                </a>
                <ul class="serv-show">
                   <li  class="list" ><a asp-controller="Settings" asp-action="Contact">Contact us</a></li>
                 <li  class="list"><a asp-controller="Settings" asp-action="About">About</a></li>
                 <li  class="list"><a asp-controller="Settings" asp-action="PrivacyAndPolicy">Privacy And Policy</a></li>
-                <li  class="list"><a asp-area="" asp-controller="MasterData" asp-action="MasterData">MasterData</a></li>
                </ul>
             </li>
-            <li  class="list"><a asp-area="" asp-controller="Admin" asp-action="Userdata">Users</a></li>
-        <li ><a asp-area="" asp-controller="" asp-action="">Orders</a></li>
+            <li  class="list"><a asp-controller="Admin" asp-action="Userdata" style=" color: cyan; border-left-color: cyan;">Users</a></li>
+        <li ><a asp-controller="OrderDetails" asp-action="OrderList" style=" color: cyan; border-left-color: cyan;">Orders</a></li>
  
          </ul>
       </nav>
@@ -111,7 +110,7 @@
 }
     .sidebar .unorder {
         background: #1b1b1b;
-        height: 100%;
+        height: 104%;
         width: 100%;
         list-style: none;
     }

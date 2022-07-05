@@ -1,4 +1,5 @@
-﻿using DomainLayer;
+﻿using APILayer.Models;
+using DomainLayer;
 using DomainLayer.Product;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -19,8 +20,9 @@ namespace UILayer.ApiServices
             _configuration = configuration;
             _url = _configuration.GetSection("Development")["BaseApi"].ToString();
         }
-        public IEnumerable<UserCheckOut> GetOderDetails()
+        public IEnumerable<UserCheckOut> GetOrderDetails()
         {
+            Response<IEnumerable<UserCheckOut>> _responseModel = new Response<IEnumerable<UserCheckOut>>();
             using (HttpClient httpclient = new HttpClient())
             {
 
@@ -30,10 +32,9 @@ namespace UILayer.ApiServices
                 if (result.Result.IsSuccessStatusCode)
                 {
                     System.Threading.Tasks.Task<string> response = result.Result.Content.ReadAsStringAsync();
-                    var results = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<UserCheckOut>>(response.Result);
-                    return results;
+                    _responseModel = Newtonsoft.Json.JsonConvert.DeserializeObject<Response<IEnumerable<UserCheckOut>>>(response.Result);
                 }
-                return null;
+                return _responseModel.Data;
             }
 
         }
@@ -63,9 +64,12 @@ namespace UILayer.ApiServices
         {
             using (HttpClient httpclient = new HttpClient())
             {
+                orderdetails.address = null;
+                orderdetails.user = null;
+                orderdetails.product = null;
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(orderdetails);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/Orderdetails/OrderPut";
+                string url = "https://localhost:44388/api/Orders/UpdateUserCheckOut";
                 Uri uri = new Uri(url);
                 HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
 
@@ -75,7 +79,7 @@ namespace UILayer.ApiServices
                 }
                 return false;
             }
-            }
+        }
         public bool OrderDetailsCreate(UserCheckOut orderdetails)
         {
 

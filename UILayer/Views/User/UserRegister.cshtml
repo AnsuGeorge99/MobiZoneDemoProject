@@ -53,11 +53,13 @@
 <head>
     <style>
         @@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400&display=swap');
-*, ::after, ::before{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
+        *, ::after, ::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         .simple-form {
             min-width: 350px;
             position: absolute;
@@ -74,6 +76,7 @@
             height: 100%;
             font-family: 'Poppins', sans-serif;
         }
+
         .animate-border {
             position: absolute;
             z-index: -1;
@@ -85,6 +88,7 @@
             left: -3px;
             z-index: -111;
         }
+
             .animate-border::before {
                 content: "";
                 position: absolute;
@@ -98,22 +102,22 @@
                 background-image: linear-gradient(to right, transparent 10%, rgb(57 153 83 / 5%) 10%, rgb(57 153 83 / 15%) 20%,rgb(57 153 83 / 20%), #42a9c1);
                 animation: animate-border 3s linear infinite;
             }
-        
+
         @@keyframes animate-border {
-  to {
-    transform: rotate(360deg);
-  }
-}
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <section class="simple-form " style="width: 22%;">
-    
+
     <div class="animate-border"></div>
     <div class="simple-form-content">
         <h3 class="text-center" style="color:white;">Registration</h3>
 
-        <form id="RegistrationForm" method="post" asp-action="UserRegister" >
+        <form id="RegistrationForm" method="post" asp-action="UserRegister">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -160,3 +164,7 @@
         </form>
     </div>
 </section>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await Component.InvokeAsync("Notyf")
+@RenderSection("Scripts", required: false)

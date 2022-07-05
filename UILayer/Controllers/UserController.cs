@@ -20,6 +20,7 @@ using Newtonsoft.Json;
 using UILayer.ApiServices.AddToCart;
 using Repository.Migrations;
 using DomainLayer.Product;
+using DomainLayer.Orders;
 
 namespace UILayer.Controllers
 {
@@ -31,6 +32,7 @@ namespace UILayer.Controllers
         private readonly OrdersApi _ordersApi;
         private CartDetailsOperationApi _detailsOperationApi;
         private CartOperationApi _cartOperationApi;
+        private readonly OrderDetailsApi _orderDetailsApi;
         List<Cart> _carts;
         cart cart = new cart();
         CartDetails details = new CartDetails();
@@ -44,6 +46,7 @@ namespace UILayer.Controllers
             _productApi = new ProductApi(_configuration);
             _addressApi = new AddressApi(_configuration);
             _ordersApi = new OrdersApi(_configuration);
+            _orderDetailsApi = new OrderDetailsApi(_configuration);
             _cartOperationApi = new CartOperationApi();
             _detailsOperationApi = new CartDetailsOperationApi();
             _notyf = notyf;
@@ -244,14 +247,25 @@ namespace UILayer.Controllers
         public IActionResult MyOrders()
         {
             var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+<<<<<<< HEAD
             var orders = _ordersApi.GetCheckOutList().Where(x => x.userId.Equals(user.registrationId));
+=======
+            var orders = _ordersApi.GetCheckOutList().Where(x => x.userId.Equals(user.registrationId));          
+>>>>>>> ef69d44e83dbd992490a4ee5ede3ab7482eb4a00
             foreach (var checkOutData in orders)
             {
                 var product = _productApi.GetProduct().Where(c => c.id.Equals(checkOutData.productId)).FirstOrDefault();
                 checkOutData.product = product;
-
             }
             return View(orders);
+        }
+
+        public IActionResult OrderStatusUpdate(int id)
+        {
+            var cancelOrder = _ordersApi.GetCheckOutList().Where(x => x.id.Equals(id)).FirstOrDefault();
+            cancelOrder.status = OrderStatus.cancelled;
+            _orderDetailsApi.OrderDetailsEdit(cancelOrder);
+            return RedirectToAction("MyOrders");
         }
 
         [HttpGet]
@@ -477,7 +491,7 @@ try
                 {
                 }
                 if (_carts.ToList().Where(c => c.usersId.Equals(user.registrationId)) != null)
-                 {
+                {
                     var data = _carts.ToList().Where(c => c.usersId.Equals(user.registrationId)).FirstOrDefault();
 
                     var count = 0;
@@ -525,37 +539,7 @@ try
             ViewData["cart"] = vartData;
             ViewData["userData"] = user;
             return View();
-
         }
-        public IActionResult BuyCart(UserCheckOut checkout)
-        {
-            Registration user;
-            user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-            Cart myCart = new Cart();
-            myCart = _cartOperationApi.CartDatas().Where(c => c.usersId.Equals(user.registrationId)).FirstOrDefault();
-            foreach (var caratDetailsData in myCart.cartDetails)
-            {
-                var product = _productApi.GetProduct().Where(c => c.id.Equals(caratDetailsData.productId)).FirstOrDefault();
-                caratDetailsData.product = product;
-            }
-            foreach (var data in myCart.cartDetails)
-            {
-                UserCheckOut checkout1 = new UserCheckOut();
-                checkout1.addressId = checkout.addressId;
-                Random rnd = new Random();
-                checkout1.orderId = rnd.Next();
-                checkout1.paymentModeId = checkout.paymentModeId;
-                checkout1.userId = checkout.userId;
-                checkout.status = DomainLayer.Orders.OrderStatus.orderPlaced;
-                checkout.price = (int)data.price;
-                bool result = _ordersApi.AddCheckOutList(checkout);
-            }
-            _cartOperationApi.DeleteCartData(myCart.id);
-            return View("OrderPlaced");
-        }
-
-
     }
 
 }
-

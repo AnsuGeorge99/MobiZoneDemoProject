@@ -3,8 +3,6 @@
 
 @{ ViewData["Title"] = "Index"; }
 
-
-
 <div class="head">
 
 
@@ -24,57 +22,61 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js" defer></script>
 
-@*@if (.image == null || data.product.image.Count() == 0)
+
+@if (Model != null)
 {
-    <p>no image</p>
+
+    <table id="myTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Model</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'http://localhost:58070/api/ProductCatagory',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                    $('#myTable').DataTable({
+                        data: data,
+                        columns: [
+                            { 'data': 'productName' },
+
+                            { "data": "productModel" },
+                            { "data": "productPrice" },
+
+                            {
+                                "render": function (data, type, row, meta) {
+                                    return '<img src="/Images/ProductImages/' + row.image + '"height="100" width="50"/>';
+                                }
+                            },
+                            {
+                                "render": function (data, type, row, meta) {
+                                    return '<a href="Product/Edit/' + row.id + '">Edit</a>';
+                                }
+                            },
+                            {
+                                "render": function (data, type, row, meta) { return '<a href="Product/Delete/' + row.id + '">Delete</a>'; }
+                            }
+                        ]
+                    });
+                }
+            })
+        })
+    </script>
+
 }
 else
-{*@
-
-<table id="myTable" class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Model</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-
-</table>
+{
+    <a asp-action="OrderDetails"><img src="~/images/No Products Found.jpg" style=" width: 50%; margin-left: 300px;" /></a>
 }
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: 'http://localhost:58070/api/ProductCatagory',
-            dataType: 'json',
-            success: function (data) {
-                console.log(data)
-                $('#myTable').DataTable({
-                    data: data,
-                    columns: [
-                        { 'data': 'productName' },
 
-                        { "data": "productModel" },
-                        { "data": "productPrice" },
-
-                        {
-                            "render": function (data, type, row, meta) {
-                                return '<img src="/Images/ProductImages/' + row.image + '"height="50" width="50"/>';
-                            }
-                        },
-                        {
-                            "render": function (data, type, row, meta) {
-                                return '<a href="Product/Edit/' + row.id + '">Edit</a>';
-                            }
-                        },
-                        {
-                            "render": function (data, type, row, meta) { return '<a href="Product/Delete/' + row.id + '">Delete</a>'; }
-                        }
-                    ]
-                });
-            }
-        })
-    })
-</script>
