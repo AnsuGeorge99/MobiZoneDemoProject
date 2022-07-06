@@ -25,15 +25,12 @@
                                     <a asp-controller="Settings" asp-action="EditAbout" class="btn btn-primary" style=" color: #fff; background-color: #337ab7; border-color: #2e6da4; position: relative; top: 50px; left: 100px; margin-left: 70px;">Edit</a>
                                 </div>
                             </div>
+                            <a type="button" class="btn btn-primary" style=" padding-left: 1%; padding-right: 1%; margin-left: 700px; " asp-controller="admin" asp-action="index">Back</a>
                         }
-                        <a type="button" class="btn btn-primary" style=" padding-left: 1%; padding-right: 1%; margin-left: 700px; " asp-controller="user" asp-action="index">Back</a>&nbsp;
-
-                       @* <style>
-                            .About {
-                                margin-left: 300px;
-                            }
-                        </style>
-*@
+                        else
+                        {
+                            <a type="button" class="btn btn-primary" style=" padding-left: 1%; padding-right: 1%; margin-left: 700px; " asp-controller="user" asp-action="index">Back</a>
+                        }
                     </section>
                 </div>
             </div>
