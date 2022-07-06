@@ -34,7 +34,7 @@
         @if (data.status != DomainLayer.Orders.OrderStatus.cancelled)
         {
             <div class="col-2">
-                <div class="col-12" style="font-weight: bold;"><a class="btn-danger" asp-controller="user" asp-action="OrderStatusUpdate" asp-route-id="@data.id">Cancel Order</a></div>
+                <div class="col-12" style="font-weight: bold;"><a class="btn-danger" style="padding: 5px; border-radius: 5px;" asp-controller="user" asp-action="OrderStatusUpdate" asp-route-id="@data.id">Cancel Order</a></div>
             </div>
         }
     </div>
