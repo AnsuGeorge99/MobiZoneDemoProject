@@ -1,3 +1,4 @@
+
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,13 +38,13 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li style="margin-top: -39px;">
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="account">@User.Identity.Name </a>
+                            <a class="nav-link text-dark" asp-controller="User" asp-action="account">Hello@User.Identity.Name </a>
                         </li>
                     }
                     else
                     {
                         <li style=" margin-left: -100px; margin-top: -53px;"><a asp-area="" asp-controller="User" asp-action="UserRegister">Sign Up</a></li>
-                        <li style=" margin-top: -49px;; "><a asp-area="" asp-controller="User" asp-action="Login">Login</a></li>
+                        <li style=" margin-top: -49px; "><a asp-area="" asp-controller="User" asp-action="Login">Login</a></li>
                     }
 
                 </ul>
@@ -57,15 +58,16 @@
             @*<li><a href="#">SortBy</a></li>*@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown" style="padding-right: 128px;">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        SortBy
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/user/SortByDescending">High to low</a></li>
-                        <li><a class="dropdown-item" href="/user/SortByAsc">Low to High</a></li>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                SortBy
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="/user/SortByDescending">High to low</a></li>
+                <li><a class="dropdown-item" href="/user/SortByAsc">Low to High</a></li>
 
-                    </ul>
-                </li>
+            </ul>
+        </li>
+                
             </ul>
             <ul class="nav navbar-nav" style="display:flex; flex-direction:row;">
 
@@ -83,13 +85,13 @@
                 </ul>
             </ul>
 
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" asp-action="SearchProduct" >
 
                 <div class="form-group">
 
-                    <input type="text" class="form-control" placeholder="Search" style=" width: 493px;">
+                    <input type="text" asp-action="SearchProduct"class="form-control" placeholder="Search" style=" width: 493px;" name="name" >
                 </div>
-                <button type="submit" class="btn btn-default">Search</button>
+                <button type="submit" class="btn btn-default" >Search</button>
 
             </form>
             @if (User.Identity.IsAuthenticated)
@@ -373,3 +375,4 @@
 
 
 </style>
+
