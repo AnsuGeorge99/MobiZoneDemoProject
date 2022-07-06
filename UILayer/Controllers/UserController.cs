@@ -538,6 +538,34 @@ try
             ViewData["userData"] = user;
             return View();
         }
+        public IActionResult BuyCart(UserCheckOut checkout)
+        {
+            Registration user;
+            user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+            Cart myCart = new Cart();
+            myCart = _cartOperationApi.CartDatas().Where(c => c.usersId.Equals(user.registrationId)).FirstOrDefault();
+            foreach (var caratDetailsData in myCart.cartDetails)
+            {
+                var product = _productApi.GetProduct().Where(c => c.id.Equals(caratDetailsData.productId)).FirstOrDefault();
+                caratDetailsData.product = product;
+            }
+            foreach (var data in myCart.cartDetails)
+            {
+                UserCheckOut checkout1 = new UserCheckOut();
+                checkout1.addressId = checkout.addressId;
+                Random rnd = new Random();
+                checkout1.orderId = rnd.Next();
+                checkout1.paymentModeId = checkout.paymentModeId;
+                checkout1.userId = checkout.userId;
+                checkout.status = DomainLayer.Orders.OrderStatus.orderPlaced;
+                checkout.price = (int)data.price;
+                bool result = _ordersApi.AddCheckOutList(checkout);
+            }
+            _cartOperationApi.DeleteCartData(myCart.id);
+            return View("OrderPlaced");
+        }
+
+
     }
 
 }
