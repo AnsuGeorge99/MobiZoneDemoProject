@@ -6,13 +6,13 @@
          <span class="fas fa-bars"></span>
       </div>
       <nav class="sidebar">
-         <div class="text">
+         @*<div class="text">
             Admin
-         </div>
+         </div>*@
          <ul class="unorder" >
-            <li class="actives" class="list" ><a href="#">Dashboard</a></li>
+            <li class="actives" class="list" ><a href="#" style=" text-transform: uppercase;">Admin Dashboard</a></li>
             <li  class="list">
-               <a href="#" class="feat-btns" style=" color: cyan; border-left-color: cyan;">Product
+               <a href="#" class="feat-btns" style=" color: #007bff; border-left-color: cyan;">Product
                <span class="fas fa-caret-down first"></span>
                </a>
                <ul class="feat-show">
@@ -21,7 +21,7 @@
                </ul>
             </li>
             <li  class="list">
-               <a href="#" class="serv-btns" style=" color: cyan; border-left-color: cyan;">Settings
+               <a href="#" class="serv-btns" style=" color: #007bff; border-left-color: cyan;">Settings
                <span class="fas fa-caret-down second"></span>
                </a>
                <ul class="serv-show">
@@ -30,8 +30,8 @@
                 <li  class="list"><a asp-controller="Settings" asp-action="PrivacyAndPolicy">Privacy And Policy</a></li>
                </ul>
             </li>
-            <li  class="list"><a asp-controller="Admin" asp-action="Userdata" style=" color: cyan; border-left-color: cyan;">Users</a></li>
-        <li ><a asp-controller="OrderDetails" asp-action="OrderList" style=" color: cyan; border-left-color: cyan;">Orders</a></li>
+            <li  class="list"><a asp-controller="Admin" asp-action="Userdata" style=" color: #007bff; border-left-color: cyan;">Users</a></li>
+        <li ><a asp-controller="OrderDetails" asp-action="OrderList" style=" color: #007bff; border-left-color: cyan;">Orders</a></li>
  
          </ul>
       </nav>
@@ -102,7 +102,7 @@
     }
     .sidebar .text {
         /* color: white;*/
-        color: cyan;
+        color: #007bff;
         font-size: 25px;
         font-weight: 600;
         line-height: 65px;
@@ -123,22 +123,22 @@ nav ul li{
 nav ul li:last-child{
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-nav ul li a{
-  position: relative;
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  padding-left: 40px;
-  font-weight: 500;
-  display: block;
-  width: 100%;
-  border-left: 3px solid transparent;
-}
-nav ul li.actives a{
-  color: cyan;
-  background: #1e1e1e;
-  border-left-color: cyan;
-}
+    nav ul li a {
+        position: relative;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 18px;
+        padding-left: 40px;
+        font-weight: 500;
+        display: block;
+        width: 100%;
+        border-left: 3px solid transparent;
+    }
+    nav ul li.actives a {
+        color: #007bff;
+        background: #1e1e1e;
+        border-left-color: cyan;
+    }
 nav ul li a:hover{
   background: #1e1e1e;
 }
@@ -156,11 +156,11 @@ nav ul ul li{
   line-height: 42px;
   border-top: none;
 }
-nav ul ul li a{
-  font-size: 17px;
-  color: #e6e6e6;
-  padding-left: 80px;
-}
+    nav ul ul li a {
+        font-size: 17px;
+        color: #007bff;
+        padding-left: 80px;
+    }
 nav ul li.actives ul li a{
   color: #e6e6e6;
   background: #1b1b1b;
