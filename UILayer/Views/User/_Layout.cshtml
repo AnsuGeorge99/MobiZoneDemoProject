@@ -21,7 +21,7 @@
         <div class="container">
             <div class="navbar-header" style="margin-left: -133px;">
                 <a class="navbar-brand" href="/user/index">
-                    <img src="/images/MobiZonelogo.png" alt="..." height="36" style="margin-right: -44px; margin-top: -8px; ">
+                    <img src="/images/Logo/MobiZone-Logo-Full@2x.png" alt="..." height="36" style="margin-right: -44px; margin-top: -8px; ">
                 </a>
                 @*<a href="/user/index" class="navbar-brand">MobiZone</a>*@
             </div>
@@ -81,11 +81,11 @@
         </ul>
      
 
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" asp-action="SearchProduct">
 
                 <div class="form-group">
 
-                    <input type="text" class="form-control" placeholder="Search" style=" width: 493px;">
+                    <input type="text" class="form-control" placeholder="Search" style=" width: 493px;" name="name">
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
 
@@ -142,7 +142,7 @@
     <footer class="footer-distributed">
 
         <div class="footer-left">
-
+            <div class="logo"><img src="~/images/Logo/MobiZone-Logo-Squre.png"  style=" width: 80px; margin-top: -33px;"/></div>
             <h3>Mobi<span>Zone</span></h3>
 
             <p class="footer-links">
@@ -233,11 +233,12 @@
 
 /* The company logo */
 
-.footer-distributed h3{
-	/*color:  #ffffff;*/
-	font: normal 36px 'Open Sans', cursive;
-	margin: 0;
-}
+    .footer-distributed h3 {
+        /*color:  #ffffff;*/
+        font: normal 36px , cursive;
+        margin: 0;
+        text-transform: uppercase;
+    }
 
     .footer-distributed h3 span {
         color: #42a9c1;
