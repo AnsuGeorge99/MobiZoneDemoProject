@@ -137,7 +137,8 @@ namespace UILayer.Controllers
                     productModel = product.productModel,
                     image = stringFileName,
                     quantity = product.quantity,
-                    description = product.description
+                    description = product.description,
+                    specification = product.specification
                 };
                 bool result = _productApi.Edit(productsModel);
                 if (result)

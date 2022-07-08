@@ -26,12 +26,12 @@
             <div class="col-12">@data.product.productModel</div>
         </div>
         <div class="col-3">
-            <div class="col-12" style="font-weight: bold;color: green;"> &#8377 @data.product.productPrice</div>
+            <div class="col-12" style="font-weight: bold;color: green;"> &#8377 @data.price</div>
         </div>
         <div class="col-2">
             <div class="col-12" style="font-weight: bold;" id="orderStatus">@data.status</div>
         </div>
-        @if ((data.status != DomainLayer.Orders.OrderStatus.cancelled) || (data.status != DomainLayer.Orders.OrderStatus.delivered))
+        @if ((data.status != DomainLayer.Orders.OrderStatus.cancelled) && (data.status != DomainLayer.Orders.OrderStatus.delivered))
         {
             <div class="col-2">
                 <div class="col-12" style="font-weight: bold;"><a class="btn-danger" style="padding: 5px; border-radius: 5px;" asp-controller="user" asp-action="OrderStatusUpdate" asp-route-id="@data.id">Cancel Order</a></div>
