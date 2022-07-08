@@ -38,7 +38,7 @@ namespace UILayer.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        
+
         {
             var products = _productApi.GetProduct();
             return View(products);
@@ -104,7 +104,7 @@ namespace UILayer.Controllers
         }
         [HttpPost]
         public ActionResult Create(ProductView product)
-      {
+        {
             if (product.id == 0)
             {
                 string stringFileName = UploadFile(product);
@@ -116,15 +116,15 @@ namespace UILayer.Controllers
                     image = stringFileName,
                     quantity = product.quantity,
                     description = product.description,
-                    specification = product.specification                   
+                    specification = product.specification
                 };
 
                 bool result = _productApi.Create(productsModel);
                 if (result)
                 {
-                    return RedirectToAction("Index");                 
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                return Content("Failed");
             }
             else
             {
@@ -137,15 +137,14 @@ namespace UILayer.Controllers
                     productModel = product.productModel,
                     image = stringFileName,
                     quantity = product.quantity,
-                    description = product.description,
-                    specification = product.specification
+                    description = product.description
                 };
                 bool result = _productApi.Edit(productsModel);
                 if (result)
                 {
                     return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                return Content("Failed");
             }
         }
 
@@ -171,39 +170,40 @@ namespace UILayer.Controllers
             return View("Index", data);
 
         }
-        //[HttpPost("filter")]
-        //public IActionResult filter(string brandName)
-        //{
+        [HttpPost("filter")]
+        public IActionResult filter(string brandName)
+        {
 
-        //    var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
+            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
 
-           
-        //    //IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
-        //    //if (filteredData != null)
-        //    //{
-        //    //    if (brandName != null)
-        //    //    {
-        //    //        filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
-        //    //    }
-        //    //    int count = 0;
-        //    //    var productCount = filteredData.Count();
-        //    //    int cout = 0;
-        //    //    for (int i = 0; i <= 0; i++)
-        //    //    {
-        //    //        if (productCount > 10)
-        //    //        {
-        //    //            cout += 1;
-        //    //        }
-        //    //        productCount = productCount - 10;
-        //    //    }
-        //    //    var result = filteredData.Skip((int)count * 10).Take(10);
-        //    //    ViewBag.count = cout;
-        //    //    return View("Index", result);
-        //    //}
 
-        //    return View("Index");
+            IEnumerable<ProductView> filteredData = (IEnumerable<ProductView>)_productApi.GetProduct().Where(c => c.productStatus.Equals(Status.enable));
+            if (filteredData != null)
+            {
+                if (brandName != null)
+                {
+                    filteredData = (IEnumerable<ProductView>)_productApi.Filter(brandName).Result;
+                }
+                int count = 0;
+                var productCount = filteredData.Count();
+                int cout = 0;
+                for (int i = 0; i <= 0; i++)
+                {
+                    if (productCount > 10)
+                    {
+                        cout += 1;
+                    }
+                    productCount = productCount - 10;
+                }
+                var result = filteredData.Skip((int)count * 10).Take(10);
+                ViewBag.count = cout;
+                return View("Index", result);
+            }
+
+            return View("Index");
 
         }
 
     }
+}
 
