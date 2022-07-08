@@ -52,8 +52,8 @@
         <ul class="nav navbar-nav" style="display:flex; flex-direction:row;">
             <li id="selectitem" >
                 <div class="row">
-                    <form asp-controller="UserProductHome" class="form-inline" asp-action="filter" method="post">
-                        <select id="drpEmpList" name="brandName" class="form-control col-6" style="width:216px; margin-top:9px; ">
+                    <form class="form-inline" action="filter" name="brandName" asp-action="filter">
+                        <select id="drpEmpList" name="name" class="form-control col-6" style="width:216px; margin-top:9px; ">
                             <option value="0">--Select--</option>
                             <option value="samsung">Samsung</option>
                             <option value="redmi">Redmi</option>
