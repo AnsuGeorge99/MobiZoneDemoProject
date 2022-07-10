@@ -90,7 +90,7 @@ namespace UILayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(ProductsModel productsModel)
+        public ActionResult DeleteProduct(ProductsModel productsModel)
         {
             bool result = _productApi.Delete(productsModel.id);
             if (result)

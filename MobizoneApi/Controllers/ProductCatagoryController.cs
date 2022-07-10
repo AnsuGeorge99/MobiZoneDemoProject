@@ -29,7 +29,7 @@ namespace APILayer.Controllers
         
             private readonly ILogger<ProductCatagoryController> _logger;
             IProductCatagory _catalog;
-        IEnumerable<ProductsModel> _productDataList;
+            IEnumerable<ProductsModel> _productDataList;
 
         public ProductCatagoryController(ILogger<ProductCatagoryController> logger, IProductCatagory catalog)
             {
@@ -37,11 +37,11 @@ namespace APILayer.Controllers
                 _catalog = catalog;
         }
             [HttpGet]
-            public Task<IEnumerable<ProductsModel>> Get()
+            public async Task<IEnumerable<ProductsModel>> Get()
             {
                 try
                 {
-                    var products = _catalog.GetProducts();
+                    var products = await _catalog.GetProducts();
                     return products;
                 }
                 catch (Exception ex)

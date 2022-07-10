@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace UILayer.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -31,13 +31,13 @@ namespace UILayer.Controllers
         {
             return View();
         }
-        [Authorize]
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
             return Redirect("Login");
         }
-        [Authorize]
+
         public IActionResult Login()
         {
             return View();
@@ -47,6 +47,12 @@ namespace UILayer.Controllers
             var _userlist = _adminApi.GetUserData();
 
             return View(_userlist);
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
         }
 
     }

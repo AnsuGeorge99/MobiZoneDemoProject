@@ -181,7 +181,7 @@ namespace UILayer.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult BuyNow(int id)
         {
             ViewBag.BuyNowUrl = "/CheckOut/BuyNow/"+ id;
