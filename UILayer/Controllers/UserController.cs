@@ -100,6 +100,7 @@ namespace UILayer.Controllers
                     claims.Add(new Claim("email", loginView.username));
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
                     claims.Add(new Claim(ClaimTypes.Name, loginView.username));
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
                     claims.Add(new Claim("role", "Admin"));
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -121,7 +122,7 @@ namespace UILayer.Controllers
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                if(ReturnUrl== null)
+                if (ReturnUrl == null)
                 {
                     return Redirect("/");
                 }
@@ -211,7 +212,7 @@ namespace UILayer.Controllers
         public IActionResult filter(string brandName)
         {
             var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
-            return View("Index",data);
+            return View("Index", data);
         }
 
         public IActionResult SearchProduct(string name)
@@ -278,8 +279,9 @@ namespace UILayer.Controllers
                 if (User.Identity.IsAuthenticated)
                 {
                     var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
-try
-{
+                    try
+                    {
+
                         string name = JsonConvert.SerializeObject(_cartOperationApi.CartDatas());
                         if (JsonConvert.DeserializeObject<List<Cart>>(name) != null)
                         {
@@ -329,8 +331,6 @@ try
             cartDetails.quantity = 1;
             var productData = _productApi.GetProduct().Where(c => c.id.Equals(id)).FirstOrDefault();
             cartDetails.price = 1 * productData.productPrice;
-
-
             cartList.Add(cartDetails);
             Cart cart = new Cart();
             Cart productCart = new Cart();
@@ -536,7 +536,7 @@ try
             ViewData["cartDetails"] = carts;
             ViewData["cart"] = vartData;
             ViewData["userData"] = user;
-            return View();
+            return View();
         }
         public IActionResult BuyCart(UserCheckOut checkout)
         {

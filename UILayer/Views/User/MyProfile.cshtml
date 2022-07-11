@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="jquery-3.6.0.min.js"></script>
 </head>
 
 <div>
@@ -34,7 +35,8 @@
                         <label class="form-check-label" style="margin-left: 270px;">@userAddress.name <br />@userAddress.address<br />@userAddress.district<br />@userAddress.state<br />@userAddress.country<br />@userAddress.pincode<br />@userAddress.phoneNumber</label>
                         <i class="bi bi-pencil-fill"></i>
                         <a class="btn btn-primary" asp-controller="CheckOut" asp-action="UpdateAddress" asp-route-id="@userAddress.id">Edit</a>
-                        <a class="btn btn-primary" asp-controller="CheckOut" asp-action="DeleteAddress" asp-route-id="@userAddress.id">Delete</a>
+                        <a class="btn btn-primary" onclick="deleteFunction(@userAddress.id);" >Delete</a>                       
+
                     </div>
                 </div>
                 <br />
@@ -46,3 +48,53 @@
         }
     </div>
 </div>
+
+
+
+<div class="modal " id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center" style="background-color: brown;">
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<script>
+    function deleteFunction(data) {
+        var id = data;
+        $(document).ready(function (e) {
+            $.ajax({
+                url: '/checkout/DeleteAddress/' + id,
+                type: 'get',
+                success: function (response) {
+                    $("#modalConfirmDelete").find(".modal-body").html(response);
+                    $("#modalConfirmDelete").modal('show');
+                },
+                failure: function (response) {
+                    alert("fail");
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+        });
+    }
+    </script>
+

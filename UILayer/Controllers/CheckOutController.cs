@@ -157,16 +157,22 @@ namespace UILayer.Controllers
             }
         }
 
-        public ActionResult DeleteAddress(int id)
+        [HttpGet]
+        public PartialViewResult DeleteAddress(int id)
         {
-            bool result = _addressApi.Delete(id);
-            if (result)
-            {
-                return Redirect("/User/MyProfile");
-            }
-            return RedirectToAction("Index");
+            var result = _addressApi.GetAddress().Where(x=>x.id.Equals(id)).FirstOrDefault();
+            return PartialView(result);
 
         }
+
+        [HttpPost]
+        public IActionResult DeleteAddress(Address userAddress)
+        {
+            var result = _addressApi.Delete(userAddress.id);
+            return Redirect("/user/MyProfile");
+
+        }
+
 
         [HttpPost]
         public IActionResult OrderConfirmed()
@@ -175,7 +181,7 @@ namespace UILayer.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult BuyNow(int id)
         {
             ViewBag.BuyNowUrl = "/CheckOut/BuyNow/"+ id;
