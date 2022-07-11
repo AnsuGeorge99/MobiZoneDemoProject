@@ -1,7 +1,7 @@
 ﻿@model DomainLayer.Product.ProductsModel
 
 @{
-    ViewData["Title"] = "DeleteProduct";
+    ViewData["Title"] = "Delete Product";
 }
 
 
@@ -9,18 +9,6 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.specificationId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.specificationId)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.productName)
         </dt>
@@ -57,52 +45,10 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.quantity)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.productStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.productStatus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.isActive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.isActive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.modifiedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.modifiedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.modifiedOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.modifiedOn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.createdOn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.createdOn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.createdBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.createdBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.deletedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.deletedBy)
-        </dd>
     </dl>
     
     <form asp-action="DeleteProduct">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Cancel</a>
     </form>
 </div>

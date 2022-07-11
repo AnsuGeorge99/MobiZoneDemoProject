@@ -35,12 +35,7 @@
                         <label class="form-check-label" style="margin-left: 270px;">@userAddress.name <br />@userAddress.address<br />@userAddress.district<br />@userAddress.state<br />@userAddress.country<br />@userAddress.pincode<br />@userAddress.phoneNumber</label>
                         <i class="bi bi-pencil-fill"></i>
                         <a class="btn btn-primary" asp-controller="CheckOut" asp-action="UpdateAddress" asp-route-id="@userAddress.id">Edit</a>
-<<<<<<< HEAD
-                        <a class="btn btn-primary" @*asp-controller="CheckOut" asp-action="DeleteAddress" asp-route-id="@userAddress.id"*@ onclick="deleteConfirm('@userAddress.id')">Delete</a>
-=======
-                        <a class="btn btn-primary" onclick="deleteFunction(@userAddress.id);" >Delete</a>                       
-
->>>>>>> b3dd93123ea89bc20f21f40d0d834eeb7f689f6b
+                        <a class="btn btn-primary" onclick="deleteFunction(@userAddress.id);" >Delete</a>                    
                     </div>
                 </div>
                 <br />
@@ -85,33 +80,6 @@
     </div>
 </div>
 
-@section Scripts{
-    <script type="text/javascript">
-        //this is only display bootstrap modal pop up dialog
-        var deleteConfirm = function (val) {
-            $('#deletedValueName').text(val);
-            $('#delete-conformation').modal('show');
-        }
-        //call this function after click on confirm delete button
-        var deleteData = function () {
-        $('#divLoading').show();
-        var id = $('#id').val();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("DeleteAddress", "CheckOut")',
-            data:{id: id},
-            success: function (result) {
-               $("#delete-conformation").modal('hide');
-            },
-            error: function () {
-                $("#delete-conformation").modal('hide');
-            }
-        });
-       }
-    </script>
-}
-=======
-
 <div class="modal " id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
@@ -136,27 +104,3 @@
         <!--/.Content-->
     </div>
 </div>
-
-<script>
-    function deleteFunction(data) {
-        var id = data;
-        $(document).ready(function (e) {
-            $.ajax({
-                url: '/checkout/DeleteAddress/' + id,
-                type: 'get',
-                success: function (response) {
-                    $("#modalConfirmDelete").find(".modal-body").html(response);
-                    $("#modalConfirmDelete").modal('show');
-                },
-                failure: function (response) {
-                    alert("fail");
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            })
-        });
-    }
-    </script>
-
->>>>>>> b3dd93123ea89bc20f21f40d0d834eeb7f689f6b
