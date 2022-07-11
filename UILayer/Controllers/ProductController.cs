@@ -79,7 +79,7 @@ namespace UILayer.Controllers
             Storage.quantity = product.quantity;
             Storage.description = product.description;
             Storage.specification = product.specification;
-            return View("Create", Storage);
+            return View("Edit", Storage);
         }
 
         [HttpGet]
