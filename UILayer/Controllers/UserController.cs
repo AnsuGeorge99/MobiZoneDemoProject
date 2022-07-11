@@ -100,6 +100,7 @@ namespace UILayer.Controllers
                     claims.Add(new Claim("email", loginView.username));
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, loginView.username));
                     claims.Add(new Claim(ClaimTypes.Name, loginView.username));
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
                     claims.Add(new Claim("role", "Admin"));
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);

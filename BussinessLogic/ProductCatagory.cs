@@ -30,7 +30,8 @@ namespace BusinesLogic
 
         public void Delete(ProductsModel entity)
         {
-            _repo.Delete(entity);
+            entity.isActive = true;
+            _repo.Update(entity);
             _repo.Save();
         }
 
@@ -39,13 +40,14 @@ namespace BusinesLogic
             return _repo.GetById(id);
         }
 
-        public async  Task<IEnumerable<ProductsModel>> GetProducts()
+        public async Task<IEnumerable<ProductsModel>> GetProducts()
         {
-            return await _repo.GetAll(n1=> n1.specification);
+            var result = await _repo.GetAll(n1 => n1.specification);
+            return result.Where(x=>x.isActive.Equals(false));
         }
         public async Task<IEnumerable<ProductsModel>> Search(string name)
         {
-            var data = _repo.GetAll().Where(x => x.productName.StartsWith(name));
+            var data = _repo.GetAll().Where(x => x.productName.StartsWith(name) && x.isActive.Equals(false));
             return data;
         }
 
@@ -61,18 +63,18 @@ namespace BusinesLogic
         }
         public async Task<IEnumerable<ProductsModel>> FilterByBrand(string name)
         {
-            var data = _repo.GetAll(n1 => n1.specification).Result.Where(c => c.productModel.Equals(name));
+            var data = _repo.GetAll(n1 => n1.specification).Result.Where(c => c.productModel.Equals(name) && c.isActive.Equals(false));
             return data.OrderBy(c => c.productModel);
         }
 
         public async Task<IEnumerable<ProductsModel>> SortByPriceAscending()
         {
-            return _repo.GetAll(n1 => n1.specification).Result.OrderBy(c => c.productPrice);
+            return _repo.GetAll(n1 => n1.specification).Result.OrderBy(c => c.productPrice).Where(x => x.isActive.Equals(false));
         }
 
         public async Task<IEnumerable<ProductsModel>> SortByPriceDescending()
         {
-            return _repo.GetAll(n1 => n1.specification).Result.OrderByDescending(c => c.productPrice);
+            return _repo.GetAll(n1 => n1.specification).Result.OrderByDescending(c => c.productPrice).Where(x => x.isActive.Equals(false));
         }
     }
 }

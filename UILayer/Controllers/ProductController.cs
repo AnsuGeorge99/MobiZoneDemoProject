@@ -82,9 +82,17 @@ namespace UILayer.Controllers
             return View("Create", Storage);
         }
 
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public PartialViewResult DeleteProduct(int id)
         {
-            bool result = _productApi.Delete(id);
+            var result = _productApi.GetProduct().Where(x => x.id.Equals(id)).FirstOrDefault();
+            return PartialView(result);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProduct(ProductsModel productsModel)
+        {
+            bool result = _productApi.Delete(productsModel.id);
             if (result)
             {
                 _notyf.Success("Deleted Successfully");
@@ -96,6 +104,7 @@ namespace UILayer.Controllers
             return RedirectToAction("Index");
 
         }
+
 
         [HttpGet]
         public IActionResult Create()
