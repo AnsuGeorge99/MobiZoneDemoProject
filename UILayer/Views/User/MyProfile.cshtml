@@ -49,6 +49,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
     <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
         <div class="modal-content">
@@ -78,6 +79,8 @@
     </div>
 </div>
 
+=======
+>>>>>>> bb355ed561ce5d9097ebc31343038328a3893d7a
 <div class="modal " id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
@@ -102,3 +105,25 @@
         <!--/.Content-->
     </div>
 </div>
+
+<script>
+    function deleteFunction(data) {
+        var id = data;
+        $(document).ready(function (e) {
+            $.ajax({
+                url: '/checkout/DeleteAddress/' + id,
+                type: 'get',
+                success: function (response) {
+                    $("#modalConfirmDelete").find(".modal-body").html(response);
+                    $("#modalConfirmDelete").modal('show');
+                },
+                failure: function (response) {
+                    alert("fail");
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+        });
+    }
+</script>
