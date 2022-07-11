@@ -35,7 +35,7 @@
                         <label class="form-check-label" style="margin-left: 270px;">@userAddress.name <br />@userAddress.address<br />@userAddress.district<br />@userAddress.state<br />@userAddress.country<br />@userAddress.pincode<br />@userAddress.phoneNumber</label>
                         <i class="bi bi-pencil-fill"></i>
                         <a class="btn btn-primary" asp-controller="CheckOut" asp-action="UpdateAddress" asp-route-id="@userAddress.id">Edit</a>
-                        <a class="btn btn-primary" onclick="deleteFunction(@userAddress.id);" >Delete</a>                       
+                        <a class="btn btn-primary" onclick="deleteFunction(@userAddress.id);" style="color:white;">Delete</a>                       
 
                     </div>
                 </div>
@@ -57,7 +57,7 @@
         <!--Content-->
         <div class="modal-content text-center">
             <!--Header-->
-            <div class="modal-header d-flex justify-content-center" style="background-color: brown;">
+            <div class="modal-header d-flex justify-content-center" style="background-color: #236ca7;">
             </div>
 
             <!--Body-->
@@ -68,7 +68,7 @@
             </div>
 
             <!--Footer-->
-            <div class="modal-footer flex-center">
+            <div class="modal-footer flex-center" style="background-color: #236ca7;">
 
             </div>
         </div>
