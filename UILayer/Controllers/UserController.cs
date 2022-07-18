@@ -145,7 +145,7 @@ namespace UILayer.Controllers
         [HttpGet]
         public IActionResult ForgotPassword()
         {
-            return View();
+            return View(null);
         }
 
         [HttpPost]
@@ -160,6 +160,7 @@ namespace UILayer.Controllers
 
                     ModelState.Clear();
                     var userDetails = _userApi.GetUserInfo().Where(check => check.email.Equals(forgotPassword.email)).FirstOrDefault();
+                    ViewData["User"] = userDetails;
                     if (userDetails != null)
                     {
                         forgotPassword.emailSent = true;
@@ -169,6 +170,10 @@ namespace UILayer.Controllers
                         email.subject = "reset password";
                         _userApi.Email(email);
                         return View("ForgotPassword", forgotPassword);
+                    }
+                    else
+                    {
+                        forgotPassword.emailSent = false;                      
                     }
                 }
                 return View(forgotPassword);
@@ -470,9 +475,6 @@ namespace UILayer.Controllers
 
         public IActionResult RemoveCart(int id)
         {
-            var username = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
-            var password = User.Claims?.FirstOrDefault(x => x.Type.Equals("password", StringComparison.OrdinalIgnoreCase))?.Value;
-            bool check = false;
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
