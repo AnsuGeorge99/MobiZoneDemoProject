@@ -63,7 +63,7 @@
 
         function getOrderList() {
             $.ajax({
-                url: 'https://localhost:44388/api/Orderdetails/Orderdetails',
+                url: _url + 'api/Orderdetails/Orderdetails',
                 type: 'get',
                 datatype: 'json',
                 success: function (data) {

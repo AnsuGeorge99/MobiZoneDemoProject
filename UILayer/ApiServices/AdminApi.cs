@@ -1,5 +1,6 @@
 ﻿using APILayer.Models;
 using DomainLayer;
+using Microsoft.Extensions.Configuration;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,20 @@ namespace UILayer.ApiServices
 {
     public class AdminApi
     {
+        string _url;
+        IConfiguration _configuration;
+        public AdminApi(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _url = _configuration.GetSection("Development")["BaseApi"].ToString();
+        }
         public bool AdminLogin(Login userLogin)
         {
             using (HttpClient httpclient = new HttpClient())
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userLogin);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/User/AdminLogin";
+                string url = _url + "api/User/AdminLogin";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -33,7 +41,7 @@ namespace UILayer.ApiServices
             IEnumerable<Registration> userdata = new List<Registration>();
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = "https://localhost:44388/api/UserData/GetUserData";
+                string url = _url + "api/UserData/GetUserData";
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)

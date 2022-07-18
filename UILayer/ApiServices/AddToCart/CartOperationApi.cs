@@ -1,6 +1,7 @@
 ﻿using APILayer.Models;
 using DomainLayer.AddToCart;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,14 @@ namespace UILayer.ApiServices.AddToCart
 {
     public class CartOperationApi
     {
+        string _url;
+        IConfiguration _configuration;
+        public CartOperationApi(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _url = _configuration.GetSection("Development")["BaseApi"].ToString();
+        }
+
         [HttpGet("CartDatas")]
         public IEnumerable<Cart> CartDatas()
         {
@@ -20,7 +29,7 @@ namespace UILayer.ApiServices.AddToCart
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44388/api/CartOperation/GetCarts";
+                string url = _url + "api/CartOperation/GetCarts";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -39,7 +48,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/CartOperation/CartPut";
+                string url = _url + "api/CartOperation/CartPut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -56,7 +65,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/CartOperation/CartAdd";
+                string url = _url + "api/CartOperation/CartAdd";
 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
@@ -73,7 +82,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/CartOperation/CartDelete/" + id;
+                string url = _url + "api/CartOperation/CartDelete/" + id;
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 

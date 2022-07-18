@@ -14,9 +14,11 @@ namespace UILayer.ApiServices
     public class Masterdataapi
     {
         string _url;
+        IConfiguration _configuration;
         public Masterdataapi(IConfiguration configuration)
         {
-            _url = configuration["BaseApi"];
+            _configuration = configuration;
+            _url = _configuration.GetSection("Development")["BaseApi"].ToString();
         }
         [HttpGet("MasterDatas")]
         public IEnumerable<MasterData> MasterDatas()
@@ -26,7 +28,7 @@ namespace UILayer.ApiServices
                 using (HttpClient httpclient = new HttpClient())
                 {
 
-                    string url = "https://localhost:44388/api/Masterdata/GetMasterData";
+                    string url = _url + "api/Masterdata/GetMasterData";
                     Uri uri = new Uri(url);
                     System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                     if (result.Result.IsSuccessStatusCode)
@@ -48,7 +50,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(MasterData);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/Masterdata/MasterDataPut";
+                string url = _url + "api/Masterdata/MasterDataPut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -65,7 +67,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(masterdata);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/Masterdata/MasterDataPost";
+                string url = _url + "api/Masterdata/MasterDataPost";
                 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
@@ -82,7 +84,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/Masterdata/MasterDataDelete" + id;
+                string url = _url + "api/Masterdata/MasterDataDelete" + id;
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 

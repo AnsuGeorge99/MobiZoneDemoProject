@@ -27,7 +27,7 @@ namespace UILayer.Datas.Apiservices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44388/api/ProductCatagory";
+                string url = _url + "api/ProductCatagory";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -46,7 +46,7 @@ namespace UILayer.Datas.Apiservices
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string url = "https://localhost:44388/api/ProductCatagory/ProductCatagory/Details/" + id;
+                string url = _url + "api/ProductCatagory/ProductCatagory/Details/" + id;
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -68,7 +68,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(product);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/ProductCatagory/ProductPut";
+                string url = _url + "api/ProductCatagory/ProductPut";
                 Uri uri = new Uri(url);
                 HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
 
@@ -86,7 +86,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(product);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/ProductCatagory/ProductPost";
+                string url = _url+ "api/ProductCatagory/ProductPost";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.PostAsync(uri, content);
 
@@ -104,7 +104,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/productcatagory/ProductDelete/" + id;
+                string url = _url + "api/productcatagory/ProductDelete/" + id;
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 
@@ -120,7 +120,7 @@ namespace UILayer.Datas.Apiservices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44388/api/ProductCatagory/ProductSearch/" + name;
+                string url = _url + "api/ProductCatagory/ProductSearch/" + name;
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -138,7 +138,7 @@ namespace UILayer.Datas.Apiservices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44388/api/ProductCatagory/FilterByBrand";
+                string url = _url+ "api/ProductCatagory/FilterByBrand";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -157,7 +157,7 @@ namespace UILayer.Datas.Apiservices
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44388/api/ProductCatagory/SortByPriceAscending";
+                string url = _url + "api/ProductCatagory/SortByPriceAscending";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -176,7 +176,7 @@ namespace UILayer.Datas.Apiservices
         {
             using (HttpClient httpclient = new HttpClient())
             {
-                string url = "https://localhost:44388/api/ProductCatagory/SortByPriceDescending";
+                string url = _url + "api/ProductCatagory/SortByPriceDescending";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
