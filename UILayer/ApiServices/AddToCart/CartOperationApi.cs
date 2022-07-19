@@ -29,11 +29,7 @@ namespace UILayer.ApiServices.AddToCart
             using (HttpClient httpclient = new HttpClient())
             {
 
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/CartOperation/GetCarts";
-=======
                 string url = _url + "api/CartOperation/GetCarts";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -52,11 +48,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/CartOperation/CartPut";
-=======
                 string url = _url + "api/CartOperation/CartPut";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -73,11 +65,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/CartOperation/CartAdd";
-=======
                 string url = _url + "api/CartOperation/CartAdd";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
@@ -94,11 +82,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/CartOperation/CartDelete/" + id;
-=======
                 string url = _url + "api/CartOperation/CartDelete/" + id;
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 

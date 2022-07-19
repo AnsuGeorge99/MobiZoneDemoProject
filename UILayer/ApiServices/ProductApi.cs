@@ -26,12 +26,7 @@ namespace UILayer.Datas.Apiservices
         {
             using (HttpClient httpclient = new HttpClient())
             {
-
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory";
-=======
                 string url = _url + "api/ProductCatagory";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -50,11 +45,7 @@ namespace UILayer.Datas.Apiservices
 
             using (HttpClient httpClient = new HttpClient())
             {
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/ProductCatagory/Details/" + id;
-=======
                 string url = _url + "api/ProductCatagory/ProductCatagory/Details/" + id;
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -76,11 +67,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(product);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/ProductPut";
-=======
                 string url = _url + "api/ProductCatagory/ProductPut";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
 
@@ -98,11 +85,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(product);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/ProductPost";
-=======
                 string url = _url+ "api/ProductCatagory/ProductPost";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.PostAsync(uri, content);
 
@@ -120,11 +103,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/productcatagory/ProductDelete/" + id;
-=======
                 string url = _url + "api/productcatagory/ProductDelete/" + id;
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 
@@ -139,12 +118,7 @@ namespace UILayer.Datas.Apiservices
         {
             using (HttpClient httpclient = new HttpClient())
             {
-
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/ProductSearch/" + name;
-=======
                 string url = _url + "api/ProductCatagory/ProductSearch/" + name;
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -161,12 +135,7 @@ namespace UILayer.Datas.Apiservices
         {
             using (HttpClient httpclient = new HttpClient())
             {
-
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/FilterByBrand";
-=======
                 string url = _url+ "api/ProductCatagory/FilterByBrand";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -184,12 +153,7 @@ namespace UILayer.Datas.Apiservices
         {
             using (HttpClient httpclient = new HttpClient())
             {
-
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/SortByPriceAscending";
-=======
                 string url = _url + "api/ProductCatagory/SortByPriceAscending";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -208,11 +172,7 @@ namespace UILayer.Datas.Apiservices
         {
             using (HttpClient httpclient = new HttpClient())
             {
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/ProductCatagory/SortByPriceDescending";
-=======
                 string url = _url + "api/ProductCatagory/SortByPriceDescending";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)

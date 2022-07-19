@@ -27,12 +27,7 @@ namespace UILayer.ApiServices
                 UserResponse<IEnumerable<MasterData>> _responseModel = new UserResponse<IEnumerable<MasterData>>();
                 using (HttpClient httpclient = new HttpClient())
                 {
-
-<<<<<<< HEAD
-                    string url = "http://mobizoneappapi.azurewebsites.net/api/Masterdata/GetMasterData";
-=======
                     string url = _url + "api/Masterdata/GetMasterData";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                     Uri uri = new Uri(url);
                     System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                     if (result.Result.IsSuccessStatusCode)
@@ -54,11 +49,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(MasterData);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/Masterdata/MasterDataPut";
-=======
                 string url = _url + "api/Masterdata/MasterDataPut";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -75,11 +66,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(masterdata);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/Masterdata/MasterDataPost";
-=======
                 string url = _url + "api/Masterdata/MasterDataPost";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
@@ -96,11 +83,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/Masterdata/MasterDataDelete" + id;
-=======
                 string url = _url + "api/Masterdata/MasterDataDelete" + id;
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 

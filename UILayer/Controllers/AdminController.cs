@@ -22,7 +22,7 @@ namespace UILayer.Controllers
         public AdminController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _adminApi = new AdminApi();
+            _adminApi = new AdminApi(_configuration);
             _userApi = new UserApi(_configuration);
             _ordersApi = new OrdersApi(_configuration);
         }

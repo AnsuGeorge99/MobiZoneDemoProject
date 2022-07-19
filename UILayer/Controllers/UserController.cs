@@ -32,6 +32,7 @@ namespace UILayer.Controllers
         private readonly OrdersApi _ordersApi;
         private CartDetailsOperationApi _detailsOperationApi;
         private CartOperationApi _cartOperationApi;
+        private readonly AdminApi _adminApi;
         private readonly OrderDetailsApi _orderDetailsApi;
         List<Cart> _carts;
         cart cart = new cart();
@@ -47,8 +48,9 @@ namespace UILayer.Controllers
             _addressApi = new AddressApi(_configuration);
             _ordersApi = new OrdersApi(_configuration);
             _orderDetailsApi = new OrderDetailsApi(_configuration);
-            _cartOperationApi = new CartOperationApi();
-            _detailsOperationApi = new CartDetailsOperationApi();
+            _cartOperationApi = new CartOperationApi(_configuration);
+            _detailsOperationApi = new CartDetailsOperationApi(_configuration);
+            _adminApi = new AdminApi(_configuration);
             _notyf = notyf;
         }
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
@@ -89,10 +91,9 @@ namespace UILayer.Controllers
         [HttpPost("/user/login")]
         public async Task<IActionResult> Login(Login loginView, string ReturnUrl)
         {
-            AdminApi admin = new AdminApi();
             if (ReturnUrl == "/admin")
             {
-                if (admin.AdminLogin(loginView))
+                if (_adminApi.AdminLogin(loginView))
                 {
                     var claims = new List<Claim>();
 

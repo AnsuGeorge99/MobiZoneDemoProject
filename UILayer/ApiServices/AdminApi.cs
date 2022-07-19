@@ -25,11 +25,7 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userLogin);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/User/AdminLogin";
-=======
                 string url = _url + "api/User/AdminLogin";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -45,11 +41,7 @@ namespace UILayer.ApiServices
             IEnumerable<Registration> userdata = new List<Registration>();
             using (HttpClient httpClient = new HttpClient())
             {
-<<<<<<< HEAD
-                string url = "http://mobizoneappapi.azurewebsites.net/api/UserData/GetUserData";
-=======
                 string url = _url + "api/UserData/GetUserData";
->>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
