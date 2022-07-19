@@ -23,7 +23,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(user);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/User/SignUp";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/User/SignUp";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -40,7 +40,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userLogin);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/User/SignIn";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/User/SignIn";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -57,7 +57,7 @@ namespace UILayer.Datas.Apiservices
             UserResponse<IEnumerable<Registration>> _responseModel = new UserResponse<IEnumerable<Registration>>();
             using (HttpClient httpclient = new HttpClient())
             {              
-                string url = "https://localhost:44388/api/User/GetUser";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/User/GetUser";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -74,7 +74,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userLogin);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/User/UserLogin";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/User/UserLogin";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)
@@ -90,7 +90,7 @@ namespace UILayer.Datas.Apiservices
 {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userInfo);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/User/UpdateUser";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/User/UpdateUser";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -110,7 +110,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(reset);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/User/ResetPassword/";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/User/ResetPassword/";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -127,7 +127,7 @@ namespace UILayer.Datas.Apiservices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(email);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/SendEmail/Send";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/SendEmail/Send";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
                 if (result.Result.StatusCode == System.Net.HttpStatusCode.OK)

@@ -20,7 +20,7 @@ namespace UILayer.ApiServices.AddToCart
             using (HttpClient httpclient = new HttpClient())
             {
 
-                string url = "https://localhost:44388/api/CartDetailsOperation/GetCart";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/CartDetailsOperation/GetCart";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -39,7 +39,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/CartDetailsOperation/CartDetailsPut";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/CartDetailsOperation/CartDetailsPut";
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -56,7 +56,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(cart);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/CartDetailsOperation/CartDetailsAdd";
+                string url = "http://mobizoneappapi.azurewebsites.net/api/CartDetailsOperation/CartDetailsAdd";
 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);
@@ -73,7 +73,7 @@ namespace UILayer.ApiServices.AddToCart
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(id);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                string url = "https://localhost:44388/api/CartDetailsOperation/CartDetailsDelete/" + id;
+                string url = "http://mobizoneappapi.azurewebsites.net/api/CartDetailsOperation/CartDetailsDelete/" + id;
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.DeleteAsync(uri);
 
