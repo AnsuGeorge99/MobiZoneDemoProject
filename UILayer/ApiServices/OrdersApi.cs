@@ -61,7 +61,11 @@ namespace UILayer.ApiServices
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userCheckOut);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 //string url = _url + "/api/Orders/UpdateUserCheckOut";
+<<<<<<< HEAD
                 string url = "http://mobizoneappapi.azurewebsites.net/api/Orders/UpdateUserCheckOut";
+=======
+                string url = _url+ "api/Orders/UpdateUserCheckOut";
+>>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PutAsync(uri, content);
                 if (result.Result.IsSuccessStatusCode)
@@ -78,7 +82,11 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(userCheckOut);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+<<<<<<< HEAD
                 string url = "http://mobizoneappapi.azurewebsites.net/api/Orders/AddUserCheckOutList";
+=======
+                string url = _url + "api/Orders/AddUserCheckOutList";
+>>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
 
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.PostAsync(uri, content);

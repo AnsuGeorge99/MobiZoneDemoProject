@@ -26,7 +26,11 @@ namespace UILayer.ApiServices
             using (HttpClient httpclient = new HttpClient())
             {
 
+<<<<<<< HEAD
                 string url = "http://mobizoneappapi.azurewebsites.net/api/Orderdetails/Orderdetails";
+=======
+                string url = _url + "api/Orderdetails/Orderdetails";
+>>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> result = httpclient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -44,7 +48,11 @@ namespace UILayer.ApiServices
 
             using (HttpClient httpClient = new HttpClient())
             {
+<<<<<<< HEAD
                 string url = "http://mobizoneappapi.azurewebsites.net/api/Orderdetails/Orderdetails" + id;
+=======
+                string url = _url + "api/Orderdetails/Orderdetails" + id;
+>>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 Task<HttpResponseMessage> result = httpClient.GetAsync(uri);
                 if (result.Result.IsSuccessStatusCode)
@@ -69,7 +77,11 @@ namespace UILayer.ApiServices
                 orderdetails.product = null;
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(orderdetails);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+<<<<<<< HEAD
                 string url = "http://mobizoneappapi.azurewebsites.net/api/Orders/UpdateUserCheckOut";
+=======
+                string url = _url + "api/Orders/UpdateUserCheckOut";
+>>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 HttpResponseMessage response = httpclient.PutAsync(uri, content).Result;
 
@@ -87,7 +99,11 @@ namespace UILayer.ApiServices
             {
                 string data = Newtonsoft.Json.JsonConvert.SerializeObject(orderdetails);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+<<<<<<< HEAD
                 string url = "http://mobizoneappapi.azurewebsites.net/api/Orderdetails/Orderdetails";
+=======
+                string url = _url + "api/Orderdetails/Orderdetails";
+>>>>>>> 5f75dce84670d2a7a8ed1c330a39b392fbb88225
                 Uri uri = new Uri(url);
                 System.Threading.Tasks.Task<HttpResponseMessage> response = httpclient.PostAsync(uri, content);
 
