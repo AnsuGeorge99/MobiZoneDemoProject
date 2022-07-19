@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "UserAddress";
-    var returnUrl = ViewData["AddressUrl"] as string;
+    var returnUrl = ViewData["UpdateAddressUrl"] as string;
 }
 <div>
-    <h3 style="position: relative; right: -790px; margin-bottom: 30px; color: #157fdb;">Add New Address</h3>
+    <h3 style="position: relative; right: -796px; margin-bottom: 30px; color: #157fdb;">Update Address</h3>
 </div>
 <div class="row align-item-center">
     <div class="col-md-8 mb-4">
@@ -91,5 +91,6 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
 
 

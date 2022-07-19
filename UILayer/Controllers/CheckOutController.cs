@@ -121,16 +121,17 @@ namespace UILayer.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateAddress(int id)
+        public IActionResult UpdateAddress(int id, string returnUrl)
         {
+            ViewData["UpdateAddressUrl"] = returnUrl;
             try
             {
                 var data = _addressApi.AddressById(id);
                 if (data!=null)
                 {
-                    return View("Address", data);
+                    return View(data);
                 }
-                return null;
+                return Redirect(returnUrl);
             }
             catch (Exception ex)
             {
@@ -141,7 +142,6 @@ namespace UILayer.Controllers
         [HttpPost]
         public IActionResult UpdateAddress(Address userAddress)
         {
-           
             try
             {
                 var data = _addressApi.EditAddress(userAddress);
@@ -149,7 +149,7 @@ namespace UILayer.Controllers
                 {
                     return Redirect("/user/myprofile");
                 }
-                return View("Index");
+                return Redirect("Index");
             }
             catch (Exception ex)
             {

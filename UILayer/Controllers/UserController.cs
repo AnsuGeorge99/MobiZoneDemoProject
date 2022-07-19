@@ -21,11 +21,13 @@ using UILayer.ApiServices.AddToCart;
 using Repository.Migrations;
 using DomainLayer.Product;
 using DomainLayer.Orders;
+using System.Security.Policy;
 
 namespace UILayer.Controllers
 {
     public class UserController : Controller
     {
+        string _url;
         private UserApi _userApi;
         private readonly ProductApi _productApi;
         private readonly AddressApi _addressApi;
@@ -52,6 +54,7 @@ namespace UILayer.Controllers
             _detailsOperationApi = new CartDetailsOperationApi(_configuration);
             _adminApi = new AdminApi(_configuration);
             _notyf = notyf;
+            _url = _configuration.GetSection("Production")["BaseWeb"].ToString();
         }
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
@@ -166,7 +169,7 @@ namespace UILayer.Controllers
                     {
                         forgotPassword.emailSent = true;
                         Email email = new Email();
-                        email.body = "<a href='https://localhost:44328/user/ResetPassword/" + forgotPassword.email + "/" + data + "'>Click here to reset your password</a>";
+                        email.body = "<a href='" + _url + "user/ResetPassword/" + forgotPassword.email + "/" + data + "'>Click here to reset your password</a>";
                         email.toEmail = forgotPassword.email;
                         email.subject = "reset password";
                         _userApi.Email(email);
