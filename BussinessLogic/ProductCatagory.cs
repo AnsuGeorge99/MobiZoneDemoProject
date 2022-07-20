@@ -47,7 +47,7 @@ namespace BusinesLogic
         }
         public async Task<IEnumerable<ProductsModel>> Search(string name)
         {
-            var data = _repo.GetAll().Where(x => x.productName.StartsWith(name) && x.isActive.Equals(false));
+            var data = _repo.GetAll().Where(x => x.productName.ToLower().StartsWith(name.ToLower()) && x.isActive.Equals(false));
             return data;
         }
 

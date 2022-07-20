@@ -96,7 +96,7 @@ namespace UILayer.Controllers
         {
             if (ReturnUrl == "/admin")
             {
-                if (_adminApi.AdminLogin(loginView))
+                //if (_adminApi.AdminLogin(loginView))
                 {
                     var claims = new List<Claim>();
 

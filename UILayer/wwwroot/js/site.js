@@ -1,4 +1,38 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿$(document).ready(function () {
+    $.ajax({
+        url: 'product/ProductListByName',
+        dataType: 'Json',
+        success: function (data) {
+                $("#tags").autocomplete({
+                    source: data
+                });
+            
+        }
+    })
+    /*$("#searchid").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: 'product/ProductListByName',
+                headers: {
+                    "RequestVerificationToken":
+                        $('input[name="__RequestVerificationToken"]').val()
+                },
+                data: { "term": request.term },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data)
+                    response($.map(data, function (item) {
+                        return item;
+                    }))
+                },
+                error: function (xhr, textStatus, error) {
+                    alert(xhr.statusText);
+                },
+                failure: function (response) {
+                    alert("failure " + response.responseText);
+                }
+            });
+        },
+        minLength: 2
+    });*/
+});

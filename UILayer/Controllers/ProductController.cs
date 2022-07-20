@@ -174,6 +174,19 @@ namespace UILayer.Controllers
 
             return fileName;
         }
+
+        [ValidateAntiForgeryToken]
+        public IActionResult ProductListByName()
+        {
+            var list = _productApi.GetProduct().Where(x => x.isActive == false);
+            List<string> productList = new List<string>();
+            foreach(var item in list)
+            {
+                productList.Add(item.productName);
+            }
+            return new JsonResult(productList);
+        }
+
         public IActionResult SearchProduct(string name)
         {
             var data = _productApi.ProductSearch(name);
