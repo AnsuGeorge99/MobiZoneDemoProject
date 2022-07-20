@@ -23,6 +23,7 @@ namespace UILayer.ApiServices.AddToCart
 
         [HttpGet("CartDatas")]
         public IEnumerable<Cart> CartDatas()
+        
         {
 
             UserResponse<IEnumerable<Cart>> _responseModel = new UserResponse<IEnumerable<Cart>>();

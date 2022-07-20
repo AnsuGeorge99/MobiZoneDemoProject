@@ -12,14 +12,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-@{
-    <script type="text/javascript">
-        function noBack() { window.history.forward() }
-        noBack();
-        window.onload = noBack;
-        window.onpageshow = function (evt) { if (evt.persisted) noBack() }
-        window.onunload = function () { void (0) }
-    </script>
+@{ if (User.Identity.IsAuthenticated)
+    {
+        <script type="text/javascript">
+            function noBack() { window.history.forward() }
+            noBack();
+            window.onload = noBack;
+            window.onpageshow = function (evt) { if (evt.persisted) noBack() }
+            window.onunload = function () { void (0) }
+        </script>
+    }
 }
 
 <head>
@@ -214,10 +216,17 @@
         }
         else
         {
+<<<<<<< HEAD
     <div class="form-group">
         <a style="color: steelblue;" asp-action="ForgotPassword">Forgot Password?</a>
         <a class="signup" style="float: right; cursor: pointer; color: unset; color: steelblue;" onclick="SignUp()" asp-action="UserRegister"> Sign Up </a>
     </div>
+=======
+            <div class="form-group">
+                <a style="color: steelblue;" asp-action="ForgotPassword">Forgot Password?</a>
+                <a class="signup" style="float: right; cursor: pointer; color: unset; color: steelblue;" onclick="SignUp()" asp-action="UserRegister"> Sign Up </a>
+            </div>
+>>>>>>> e7b6af2aa7fe39a52614038d180d44d6fbb6d492
         }
 
         <div class="form-group" style="text-align: center;">
@@ -228,7 +237,7 @@
         </div>
 
         <div>
-            <a href="https://localhost:44328/user/login?ReturnUrl=%2Fadmin" style=" position: relative; top: 350px; left: -600px; ">Login as Admin</a>
+            <a href="https://mobizonecart.azurewebsites.net/user/login?ReturnUrl=%2Fadmin" style=" position: relative; top: 350px; left: -600px; ">Login as Admin</a>
         </div>
     </div>
 </section>

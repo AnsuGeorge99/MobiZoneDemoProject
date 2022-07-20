@@ -279,7 +279,7 @@ namespace UILayer.Controllers
         [HttpGet]
         public IActionResult AddtoCart()
         {
-            var username = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
+                var username = User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value;
             var password = User.Claims?.FirstOrDefault(x => x.Type.Equals("password", StringComparison.OrdinalIgnoreCase))?.Value;
             List<CartDetails> cartList = new List<CartDetails>();
             try
@@ -312,11 +312,14 @@ namespace UILayer.Controllers
 
                         }
                     }
+
                     foreach (var data in cartList)
                     {
+                       
                         var product = _productApi.GetProduct().Where(c => c.id.Equals(data.productId)).FirstOrDefault();
                         data.product = product;
                     }
+
                 }
             }
             catch (Exception ex)
@@ -563,9 +566,10 @@ namespace UILayer.Controllers
                 checkout1.orderId = rnd.Next();
                 checkout1.paymentModeId = checkout.paymentModeId;
                 checkout1.userId = checkout.userId;
-                checkout.status = DomainLayer.Orders.OrderStatus.orderPlaced;
-                checkout.price = (int)data.price;
-                bool result = _ordersApi.AddCheckOutList(checkout);
+                checkout1.status = DomainLayer.Orders.OrderStatus.orderPlaced;
+                checkout1.price = (int)data.price;
+                checkout1.productId= data.productId;
+                bool result = _ordersApi.AddCheckOutList(checkout1);
             }
             _cartOperationApi.DeleteCartData(myCart.id);
             return View("OrderPlaced");
