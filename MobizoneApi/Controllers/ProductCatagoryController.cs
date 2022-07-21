@@ -114,6 +114,7 @@ namespace APILayer.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest);
                 }
             }
+
         [HttpGet("ProductSearch/{name}")]
         public Response<IEnumerable<ProductsModel>> ProductSearch(string name)
         {

@@ -41,11 +41,11 @@
                         <input class="form-check-input" id="checkboxId" onchange="checkbox()" type="checkbox" name="addressId" value="@address.id" style="margin-left:6px" />
                         <label class="form-check-label" style="margin-left: 30px;">@address.name <br />@address.address<br />@address.district</label>
                     </div>
-                    <div class="row" style="padding: 2px; margin-left: -37px;">
-                        <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;"><span class="glyphicon glyphicon-plus"></span>Add New Address</a></div>
-                    </div>
                 </div>
             }
+            <div class="row" style="padding: 2px; margin-left: -37px;">
+                <div class="col"><a href="/checkout/address?returnUrl=@returnUrl" class="btn btn-primary" style="margin-left: 50px;"><span class="glyphicon glyphicon-plus"></span>Add New Address</a></div>
+            </div>
             <div class="row" style="padding: 2px; margin-left: -37px;">
                 <div class="col"><a class="btn btn-primary" id="addressContinue" style="margin-left: 50px; color:white; display:none">Continue</a></div>
             </div>
@@ -60,7 +60,7 @@
                         <img class="img-fluid" src="~/images/ProductImages/@products.image" style="padding: 15px; width: 10%;" />
                         <label class="form-check-label" for="flexCheckDefault">
                             @products.productName (@products.specification.productRam GB RAM, @products.specification.productStorage GB)<br>&#8377 @products.productPrice
-                            <div >Quantity:<input name="quantity" asp-for="@products.quantity" type="number" style="width:50px; height:20px;" value="1" id="QuantityId" onchange="myFunction(@products.productPrice)" /></div>
+                            <div >Quantity:<input name="quantity" asp-for="@products.quantity" type="number" min="1" max="@products.quantity" style="width:50px; height:20px;" value="1" id="QuantityId" onchange="myFunction(@products.productPrice)" /></div>
                         </label>
                     </div>
                 </div>
