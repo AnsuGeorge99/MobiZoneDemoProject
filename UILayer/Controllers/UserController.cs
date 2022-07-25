@@ -585,6 +585,27 @@ namespace UILayer.Controllers
             return View("OrderPlaced");
         }
 
+        [HttpGet]
+        public IActionResult NotificationBadge()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                try
+                {
+                    Cart cart = new Cart();
+                    Registration user;
+                    user = _userApi.GetUserInfo().Where(c => c.email.Equals(User.Claims?.FirstOrDefault(x => x.Type.Equals("email", StringComparison.OrdinalIgnoreCase))?.Value)).FirstOrDefault();
+                    cart = _cartOperationApi.CartDatas().Where(c => c.usersId.Equals(user.registrationId)).FirstOrDefault();
+                    var count = cart.cartDetails.Count();
+                    return new JsonResult(count);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
+            return new JsonResult(0);
+        }
 
     }
 

@@ -82,14 +82,7 @@
                 </li>
 
             </ul>
-<<<<<<< HEAD
-        </li>
-           
-        </ul>
-=======
 
-
->>>>>>> 8708f5ba314274d13d9878b9f77c95bb24418e4a
             <form class="navbar-form navbar-left" asp-action="SearchProduct">
 
                 <div class="form-group">
@@ -120,6 +113,7 @@
                     <li>
                         <a href="/user/addtocart">
                             <span class="glyphicon glyphicon-shopping-cart"></span>Cart
+                            <span class="icon-button-badge" id="badge"></span>
                         </a>
                     </li>
 
@@ -212,6 +206,21 @@
 *{
   font-family: Open Sans;
 }
+
+    .icon-button-badge {
+        position: absolute;
+        top: -4px;
+        right: -2px;
+        color: red;
+        width: 22px;
+        height: 22px;
+        background: red;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
 
 .footer-distributed{
 	/*background: #666;*/
