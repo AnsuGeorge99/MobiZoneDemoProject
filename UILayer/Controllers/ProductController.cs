@@ -181,7 +181,7 @@ namespace UILayer.Controllers
             return View("Index", data);
 
         }
-        [HttpPost("filter")]
+        [HttpPost]
         public IActionResult filter(string brandName)
         {
 
