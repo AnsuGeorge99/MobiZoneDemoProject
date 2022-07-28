@@ -64,9 +64,8 @@
         function getOrderList() {
             $.ajax({
 
-                url: 'http://mobizoneappapi.azurewebsites.net/api/Orderdetails/Orderdetails',
+                url: 'https://mobizoneappapi.azurewebsites.net/api/Orderdetails/Orderdetails',
 
-                url: _url + 'api/Orderdetails/Orderdetails',
 
                 type: 'get',
                 datatype: 'json',
@@ -86,7 +85,7 @@
                                     var sliceData = dataList.slice(dataStatus)
                                     var sliceStatus = statusList.slice(dataStatus)
                                     var formData = '<form id="orderStatus" action="/orderdetails/OrderUpdate" method="post"><input name="orderId" type="hidden" value="' + full.orderId + '"/><select id="enumDropdown" name="status" style="width: 39%;"><option value="' + dataList[full.status - 1] + '">' + dataList[full.status - 1] + '</option>';
-                                    var endData = '</select><input style="padding: 6px;margin-left: 23px;font-variant: all-small-caps;" type="submit" value="update" class="btn btn-orange"/></form>'
+                                    var endData = '</select><input style="padding: 6px;color: #fff; background-color: #337ab7; border-color: #2e6da4;margin-left: 23px;font-variant: all-small-caps;" type="submit" value="update"/></form>'
                                     sliceData.forEach(function (element) {
                                         var option = '<option value="' + element + '">' + element + '</option>';
                                         formData = formData + option;
