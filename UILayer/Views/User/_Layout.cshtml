@@ -47,20 +47,22 @@
             </div>
 
     </nav>
-    <nav class="navbar navbar-default" id="second" style="border-bottom: 1px solid #e7e7e7;" ">
+    <nav class="navbar navbar-default" id="second" style="border-bottom: 1px solid #e7e7e7;">
 
 
         <ul class="nav navbar-nav" style="display:flex; flex-direction:row;">
             <li id="selectitem">
                 <div class="row">
-                    <form class="form-inline" action="filter" name="brandName" asp-action="filter">
-                        <select id="drpEmpList" name="name" class="form-control col-6" style="width:216px; margin-top:9px; ">
+                    <form class="form-inline" action="filter"method="post">
+                        <select id="drpEmpList" name="brandName" class="form-control col-6" style="width:216px; margin-top:9px; ">
                             <option value="0">--Select--</option>
-                            <option value="samsung">SAMSUNG</option>
-                            <option value="redmi">Redmi</option>
-                            <option value="poco">POCO</option>
-                            <option value="oneplus">OnePlus</option>
+                            <option value="SAMSUNG">SAMSUNG </option>
+                            <option value="Redmi">Redmi</option>
+                            <option value="POCO">POCO</option>
+                            <option value="OnePlus">OnePlus</option>
                             <option value="vivo">Vivo</option>
+                            <option value="APPLE">APPLE </option>
+                            <option value="Amoled">Amoled </option> 
                         </select>
 
                         <input type="submit" value="Filter" style="margin-top: 8px; margin-left: 5px;" />
@@ -74,7 +76,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         SortBy
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style="position:absolute;">
                         <li><a class="dropdown-item" href="/user/SortByDescending">High to low</a></li>
                         <li><a class="dropdown-item" href="/user/SortByAsc">Low to High</a></li>
 
@@ -103,7 +105,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Account
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink"  style="position:absolute;">
                                 <li><a class="dropdown-item" href="/user/MyProfile">My Profile</a></li>
 
                                 <li><a class="dropdown-item" href="/user/MyOrders">My Orders</a></li>
