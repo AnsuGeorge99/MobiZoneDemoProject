@@ -38,6 +38,7 @@ namespace DomainLayer
         public string confirmPassword { get; set; }
         public bool isActive { get; set; }
         [Column("CreatedOn")]
+        [Display(Name = "Created On")]
         public DateTime createdOn { get; set; }
         [Column("CreatedBy", TypeName = "nvarchar")]
         [MaxLength(150)]

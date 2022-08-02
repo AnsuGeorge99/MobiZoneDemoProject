@@ -29,7 +29,7 @@
             @if ((data.status != DomainLayer.Orders.OrderStatus.cancelled) && (data.status != DomainLayer.Orders.OrderStatus.delivered))
             {
                 <div class="col-2">
-                    <div class="col-12" style="font-weight: bold;"><a class="btn btn-primary" style="padding: 5px; border-radius: 5px;" asp-controller="user" asp-action="OrderStatusUpdate" asp-route-id="@data.id">Cancel Order</a></div>
+                    <div class="col-12" style="font-weight: bold;"><a class="btn btn-primary" style="padding: 5px; border-radius: 5px;" onclick="deleteFunction(@data.id);">Cancel Order</a></div>
                 </div>
             }
         </div>
@@ -69,4 +69,51 @@ else
             $("#orderStatus").val("Cancelled");
         });
     });
+</script>
+
+<div class="modal " id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center" style="background-color: #236ca7;">
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center" style="background-color: #236ca7;">
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<script>
+    function deleteFunction(data) {
+        var id = data;
+        $(document).ready(function (e) {
+            $.ajax({
+                url: '/User/OrderStatusUpdate/' + id,
+                type: 'get',
+                success: function (response) {
+                    $("#modalConfirmDelete").find(".modal-body").html(response);
+                    $("#modalConfirmDelete").modal('show');
+                },
+                failure: function (response) {
+                    alert("fail");
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+        });
+    }
 </script>
