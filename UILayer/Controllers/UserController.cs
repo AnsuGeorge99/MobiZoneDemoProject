@@ -220,7 +220,7 @@ namespace UILayer.Controllers
         [HttpPost("filter")]
         public IActionResult filter(string brandName)
         {
-            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
+            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.ToLower().Equals(brandName.ToLower()));
             return View("Index", data);
         }
 
@@ -278,11 +278,19 @@ namespace UILayer.Controllers
             return View(orders);
         }
 
+        [HttpGet]
         public IActionResult OrderStatusUpdate(int id)
         {
-            var cancelOrder = _ordersApi.GetCheckOutList().Where(x => x.id.Equals(id)).FirstOrDefault();
-            cancelOrder.status = OrderStatus.cancelled;
-            _orderDetailsApi.OrderDetailsEdit(cancelOrder);
+            var cancelOrder = _ordersApi.GetCheckOutList().Where(x => x.id.Equals(id)).FirstOrDefault();           
+            return PartialView(cancelOrder);
+        }
+
+        [HttpPost]
+        public IActionResult OrderStatusUpdate(UserCheckOut cancelOrder)
+        {
+            var cancelOrders = _ordersApi.GetCheckOutList().Where(x => x.id.Equals(cancelOrder.id)).FirstOrDefault();
+            cancelOrders.status = OrderStatus.cancelled;
+            _orderDetailsApi.OrderDetailsEdit(cancelOrders);
             return RedirectToAction("MyOrders");
         }
 
@@ -588,7 +596,7 @@ namespace UILayer.Controllers
         [HttpGet]
         public IActionResult NotificationBadge()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && User.Claims?.FirstOrDefault(x => x.Type.Equals("Role", StringComparison.OrdinalIgnoreCase))?.Value != "Admin")
             {
                 try
                 {

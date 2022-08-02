@@ -9,6 +9,7 @@ using UILayer.ApiServices;
 using UILayer.Datas.Apiservices;
 using NPOI.OpenXml4Net.OPC;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace UILayer.Controllers
 {
@@ -19,18 +20,20 @@ namespace UILayer.Controllers
         private readonly UserApi _userApi;
         private readonly AdminApi _adminApi;
         private readonly OrdersApi _ordersApi;
+        private readonly ProductApi _productApi;
         public AdminController(IConfiguration configuration)
         {
             _configuration = configuration;
             _adminApi = new AdminApi(_configuration);
             _userApi = new UserApi(_configuration);
             _ordersApi = new OrdersApi(_configuration);
+            _productApi = new ProductApi(_configuration);
         }
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Index()
+      /*  public IActionResult Index()
         {
             return View();
-        }
+        }*/
 
         public async Task<IActionResult> Logout()
         {
@@ -55,5 +58,11 @@ namespace UILayer.Controllers
             return View();
         }
 
+        public IActionResult Index()
+        {
+            ViewData["UsersList"] = _adminApi.GetUserData().ToList().Count();
+            ViewData["ProductsList"] = _productApi.GetProduct().ToList().Count();
+            return View();
+        }
     }
 }

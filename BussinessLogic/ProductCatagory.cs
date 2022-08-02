@@ -63,7 +63,7 @@ namespace BusinesLogic
         }
         public async Task<IEnumerable<ProductsModel>> FilterByBrand(string name)
         {
-            var data = _repo.GetAll(n1 => n1.specification).Result.Where(c => c.productModel.Equals(name) && c.isActive.Equals(false));
+            var data = _repo.GetAll(n1 => n1.specification).Result.Where(c => c.productModel.ToLower().Equals(name) && c.isActive.Equals(false));
             return data.OrderBy(c => c.productModel);
         }
 
