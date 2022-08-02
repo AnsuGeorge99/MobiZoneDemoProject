@@ -220,7 +220,7 @@ namespace UILayer.Controllers
         [HttpPost("filter")]
         public IActionResult filter(string brandName)
         {
-            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.Equals(brandName));
+            var data = _productApi.GetProduct().Where(x => x.specification.productBrand.ToLower().Equals(brandName.ToLower()));
             return View("Index", data);
         }
 

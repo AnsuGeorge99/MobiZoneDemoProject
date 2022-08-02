@@ -16,9 +16,11 @@ using DomainLayer.Product;
 using Microsoft.Extensions.Configuration;
 using UILayer.ApiServices;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UILayer.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class ProductController : Controller
     {
         IConfiguration _configuration;
