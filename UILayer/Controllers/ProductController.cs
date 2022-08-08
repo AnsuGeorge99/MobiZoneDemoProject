@@ -53,7 +53,7 @@ namespace UILayer.Controllers
             var products = _productApi.GetProduct();
             return new JsonResult(products);
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult ProductDetails(int id)
 
@@ -63,13 +63,14 @@ namespace UILayer.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var products = _productApi.GetById(id);
             return View(products);
         }
 
-
+        
         [HttpGet]
         public IActionResult Edit(int id)
         {
